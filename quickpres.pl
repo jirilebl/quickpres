@@ -42,6 +42,7 @@ span.largerbold {font-size:120%; font-weight:bold;}
 span.tt {font-family: Courier, "Courier New", monospace;}
 h1 {font-size:180%; font-weight:bold;}
 h2 {font-size:120%; font-weight:bold;}
+h3 {font-size:100%; font-weight:bold;}
 ul {margin-left:0px; padding-left:1em; list-style:square;}
 body { 
 	font-family: Tex Gyre Pagella, Palatino, URW Palladio L, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;
@@ -61,10 +62,9 @@ div.centered {text-align:center;}
 h1 {text-align:left;}
 h2 {text-align:left;}
 h3 {text-align:left;}
-h4 {text-align:left;}
-h5 {text-align:left;}
 \@media screen {
  div.thebody {margin-top:20px; margin-left: 5%; margin-right:5%; max-width:1100px;}
+ h3 {margin-left:-2%;}
  h2 {margin-left:-2%;}
  h1 {margin-left:-2%;}
  p.left {margin-left:-2%;}

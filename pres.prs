@@ -1,15 +1,14 @@
 # quickpres
 
-HTML scrolling presentation for math classes.
-(To see this presentation run ./quickpres.pl and view pres.html in a browser)
+HTML scrolling presentation for math classes
 
-Press j or Enter to see what comes next ...
+Press j, Enter, or just click on the page to see what comes next ...
 
 .D
 
 ## How to use
 
-You saw j or Enter to see what comes next.   Now you can also press
+You saw j, Enter, or clicking to see what comes next.   You can also press
 k or Backspace to hide the last block.  You will need to scroll manually.
 
 New paragraphs are entered just by leaving an empty line.
@@ -31,7 +30,7 @@ Or you can do inline math with $x^2$ or \(\sqrt{2}\).
 
 .D
 Due to the inline math using the dollar sign you need to escape it with
-a slash: \$ if you actually want a dollar sign.
+a slash, \$, if you actually want a dollar sign.
 
 .D
 ## That progressive hidy thingie
@@ -85,3 +84,6 @@ see ... there's empty space.
 .D
 
 ## That's it
+
+There's always a chunk of empty space added behind the presentation so
+that you can scroll your ending to the middle easily.
