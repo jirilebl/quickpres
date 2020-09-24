@@ -1,0 +1,87 @@
+# quickpres
+
+HTML scrolling presentation for math classes.
+(To see this presentation run ./quickpres.pl and view pres.html in a browser)
+
+Press j or Enter to see what comes next ...
+
+.D
+
+## How to use
+
+You saw j or Enter to see what comes next.   Now you can also press
+k or Backspace to hide the last block.  You will need to scroll manually.
+
+New paragraphs are entered just by leaving an empty line.
+
+.D
+## Math
+
+Math is done with MathJax.  For display math:
+$$
+\int_0^1 x^2 \, dx
+$$
+.D
+Or
+\[
+\sum_{n=1}^\infty \frac{1}{n} .
+\]
+.D
+Or you can do inline math with $x^2$ or \(\sqrt{2}\).
+
+.D
+Due to the inline math using the dollar sign you need to escape it with
+a slash: \$ if you actually want a dollar sign.
+
+.D
+## That progressive hidy thingie
+
+If you want to hide the next chuck, put a .D on a separate line.
+Probably want to add an empty line, but really it is a new html division,
+so it will always include a new paragraph.
+So .D cannot really split up paragraphs or displayed math.  If you want to do that you have to just do separate displayed math.  So you can't split aligned,
+etc., but we don't want to get too fancy here.
+
+.D
+## Using HTML
+
+You can really just include html: <tt>foo</tt> or <b>foo</b>.
+But you probably shouldn't get too crazy.  Links, images, etc.
+it should all work.
+
+.D
+## Running
+
+Best to just stick <tt>quickpres.pl</tt> into the directory where
+your file is.  Then run (if on Linux) <tt>./quickpres.pl</tt>,
+which will compile <tt>pres.prs</tt> into <tt>pres.html</tt>.
+
+.D
+You can specify the files by: <tt>./quickpres.pl in.prs out.html</tt>.
+
+.D
+Adding -a, that is <tt>./quickpres.pl -a in.prs out.html</tt> or
+<tt>./quickpres.pl -a</tt> will just show all the
+blocks all at once.
+
+.D
+## Headers
+
+Use # for first level headers, ## for second level and ### for third level:
+
+# First
+## Second
+### Third
+
+.D
+## Empty space
+
+You can add a bit of empty space with .E on an empty line
+
+.E
+
+see ... there's empty space.
+
+.D
+
+## That's it
