@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>quickpres</title>
+<link rel="stylesheet" type="text/css" href="style.css"> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+html { scroll-behavior: smooth; }
+span.smaller {font-size:80%;}
+span.tiny {font-size:60%;}
+span.larger {font-size:120%;}
+span.largerbold {font-size:120%; font-weight:bold;}
+span.tt {font-family: Courier, "Courier New", monospace;}
+h1 {font-size:180%; font-weight:bold;}
+h2 {font-size:120%; font-weight:bold;}
+h3 {font-size:100%; font-weight:bold;}
+ul {margin-left:0px; padding-left:1em; list-style:square;}
+body { 
+	font-family: Tex Gyre Pagella, Palatino, URW Palladio L, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;
+        line-height: 1.5;
+	font-size: 220%;
+	background-color:#ffffff;
+	color:#000000; 
+}
+a:link {color:#900b09; background-color:transparent; }
+a:visited {color:#500805; background-color:transparent; }
+@media print {
+ a:visited {color:#900b09; background-color:transparent; }
+}
+a:hover {color:#ff0000; background-color:transparent; }
+a:active {color:#ff0000; background-color:transparent; }
+div.centered {text-align:center;}
+h1 {text-align:left;}
+h2 {text-align:left;}
+h3 {text-align:left;}
+.cimage { display:block; max-width: 90%; margin-left: auto; margin-right: auto; }
+@media screen {
+ div.thebody {margin-top:20px; margin-left: 5%; margin-right:5%; max-width:1100px;}
+ h3 {margin-left:-2%;}
+ h2 {margin-left:-2%;}
+ h1 {margin-left:-2%;}
+ p.left {margin-left:-2%;}
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$','$'],['\\(','\\)']]
+  }
+};
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6%2CscrollIntoView"></script> 
+<script id="MathJax-script" async 
+ src="https://cdn.jsdelivr.net/npm/mathjax/es5/tex-chtml.js"> 
+</script> 
+</head>
+
+<body>
+<script>
+function doenter() {
+  var rect = $("#enddiv")[0].getBoundingClientRect();
+
+  if(rect.top >= 0 && rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8) {
+    $elt = $( ".content:hidden" ).first();
+    $elt.fadeIn( "slow" );
+  } else {
+    window.scrollBy({ 
+      top: 120, // could be negative value
+      left: 0, 
+      behavior: 'smooth' 
+    });
+  }
+}
+$( document.body ).click(function() {
+  doenter();
+});
+$( document.body ).keydown(function( event ) {
+  if (event.key == "j") {
+    $( ".content:hidden" ).first().fadeIn( "slow" );
+  } else if ( event.key == "k" ) {
+    $( ".content:visible" ).last().fadeOut( "slow" );
+  } else if (event.key == "J") {
+    $elt = $( ".content:hidden" ).first();
+    $elt.fadeIn( "slow" );
+    $elt[0].scrollIntoView({ behavior: "smooth", block: "start" });
+  } else if (event.key == "Enter") {
+    doenter();
+  } else if (event.key == "K"  || event.key == "Backspace") {
+    $( ".content:visible" ).last().fadeOut( "slow" );
+    $("#enddiv")[0].scrollIntoView({ behavior: "smooth", block: "end" });
+  } else if ( event.which == 69) {
+    $("#enddiv")[0].scrollIntoView({ behavior: "smooth", block: "end" });
+  }
+});
+</script>
+<div class=thebody>
+<h1>quickpres</h1>
+<p>
+HTML scrolling presentation for math classes, with syntax mildly inspired by Markdown
+<p>
+Press j, Enter, or just click on the page to see what comes next ...
+<div class="content" style="display:none;">
+<h2>How to use</h2>
+<p>
+You saw j, Enter, or clicking to see what comes next, but there are some differences in scrolling.
+<ul><li>Enter will slowly scroll until it finds something to unhide then it unhides it, clicking does the same thing.  Probably this is the way to go through the presentation.</ul>
+<ul><li>j simply unhides the next thing hidden without scrolling.</ul>
+<ul><li>k will hide the last thing</ul>
+<ul><li>Backspace will hide the last thing and scroll to the end.</ul>
+<ul><li>e will scroll to the end (the End key scrolls a bit too far).</ul>
+<h2>Syntax</h2>
+<p>
+New paragraphs are entered just by leaving an empty line.
+<p>
+So this is a new paragraph.
+But this line is still in the second paragraph, even though we put a
+linebreak.  Just not an empty line.
+</div>
+<div class="content" style="display:none;">
+<h2>Math</h2>
+<p>
+Math is done with MathJax.  For display math:
+$$
+\int_0^1 x^2 \, dx
+$$
+</div>
+<div class="content" style="display:none;">
+<p>
+Or
+\[
+\sum_{n=1}^\infty \frac{1}{n} .
+\]
+</div>
+<div class="content" style="display:none;">
+<p>
+Or you can do inline math with $x^2$ or \(\sqrt{2}\).
+</div>
+<div class="content" style="display:none;">
+<p>
+Due to the inline math using the dollar sign you need to escape it with
+a slash, \$ (in the presentation you just see a dollar sign), if you actually want a dollar sign.
+</div>
+<div class="content" style="display:none;">
+<h2>That progressive hidy thingie</h2>
+<p>
+If you want to hide the next chuck, put a >>> on a separate line.
+Probably want to add an empty line, but really it is a new html division,
+so it will always include a new paragraph.
+So >>> cannot really split up paragraphs or displayed math.  If you want to do that you have to just do separate displayed math.  So you can't split aligned,
+etc., but we don't want to get too fancy here.
+</div>
+<div class="content" style="display:none;">
+<h2>Using HTML</h2>
+<p>
+You can really just include html: <tt>foo</tt> or <b>foo</b>.
+But you probably shouldn't get too crazy.  Links, images, etc.
+it should all work.
+Though there is a quick way to do centered nice images.
+</div>
+<div class="content" style="display:none;">
+<h2>Running</h2>
+<p>
+Best to just stick <tt>quickpres.pl</tt> into the directory where
+your file is.  Then run (if on Linux) <tt>./quickpres.pl</tt>,
+which will compile <tt>pres.prs</tt> into <tt>pres.html</tt>.
+</div>
+<div class="content" style="display:none;">
+<p>
+You can specify the files by: <tt>./quickpres.pl in.prs out.html</tt>.
+</div>
+<div class="content" style="display:none;">
+<p>
+Adding -a, that is <tt>./quickpres.pl -a in.prs out.html</tt> or
+<tt>./quickpres.pl -a</tt> will just show all the
+blocks all at once.
+</div>
+<div class="content" style="display:none;">
+<h2>Headers</h2>
+<p>
+Use # for first level headers, ## for second level and ### for third level:
+<h1>First</h1>
+<h2>Second</h2>
+<h3>Third</h3>
+<p>
+The first first-level heading is used as the title for the HTML page.
+</div>
+<div class="content" style="display:none;">
+<h1>Bullet lists</h1>
+<ul><li>Bullet lists</ul>
+</div>
+<div class="content" style="display:none;">
+<ul><li>are done</ul>
+<ul><li>similar</ul>
+<ul><li>to markdown with stars.</ul>
+<p>
+But the star can't come in the middle of
+a paragraph:
+* this is not a bullet
+<ul><li>this is a bullet</ul>
+<ul><li>If you want a long bullet point, it must all come on one line.</ul>
+<p>
+This line will be separate.  Yeah, I could code it to be smarter,
+but ... too lazy.
+</div>
+<div class="content" style="display:none;">
+<h1>Images</h1>
+<p>
+On a new line add !(img.png) to insert img.png, you can add
+alt text with ![alt text](img.png)
+<p><img class="cimage" src="sampleimg.png">
+<p>
+And now with alt text:
+<p><img class="cimage" src="sampleimg.png" alt="Alt text">
+</div>
+<div class="content" style="display:none;">
+<h2>Empty space</h2>
+<p>
+You can add a bit of empty space with ___ on an empty line
+<div style="height:2in;"></div>
+<p>
+see ... there's empty space.
+</div>
+<div class="content" style="display:none;">
+<h2>That's it</h2>
+<p>
+There's always a chunk of empty space added behind the presentation so
+that you can scroll your ending to the middle easily.
+</div>
+
+<div id="enddiv">&nbsp;</div>
+<div style="height:10in;"></div>
+
+</div>
+
+</body>
+</html>

@@ -6,3 +6,5 @@ The syntax is explained in the sample presentation pres.prs.  You should
 run `./quickpres.pl` in this directory to generate pres.html, which you
 then view in a browser.  To see the syntax, just view the pres.prs file
 in a text editor.
+
+For a demo output see the [pres.html](https://github.com/jirilebl/quickpres/raw/master/pres.html) file.
