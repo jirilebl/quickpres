@@ -1,69 +1,80 @@
 # quickpres
 
-HTML scrolling presentation for math classes
+HTML scrolling presentation for math classes, with syntax mildly inspired by Markdown
 
 Press j, Enter, or just click on the page to see what comes next ...
 
-.D
-
+>>>
 ## How to use
 
-You saw j, Enter, or clicking to see what comes next.   You can also press
-k or Backspace to hide the last block.  You will need to scroll manually.
+You saw j, Enter, or clicking to see what comes next, but there are some differences in scrolling.
+
+* Enter will slowly scroll until it finds something to unhide then it unhides it, clicking does the same thing.  Probably this is the way to go through the presentation.
+* j simply unhides the next thing hidden without scrolling.
+* k will hide the last thing
+* Backspace will hide the last thing and scroll to the end.
+* e will scroll to the end (the End key scrolls a bit too far).
+
+## Syntax
 
 New paragraphs are entered just by leaving an empty line.
 
-.D
+So this is a new paragraph.
+But this line is still in the second paragraph, even though we put a
+linebreak.  Just not an empty line.
+
+>>>
 ## Math
 
 Math is done with MathJax.  For display math:
 $$
 \int_0^1 x^2 \, dx
 $$
-.D
+>>>
 Or
 \[
 \sum_{n=1}^\infty \frac{1}{n} .
 \]
-.D
+>>>
 Or you can do inline math with $x^2$ or \(\sqrt{2}\).
 
-.D
+>>>
 Due to the inline math using the dollar sign you need to escape it with
-a slash, \$, if you actually want a dollar sign.
+a slash, \$ (in the presentation you just see a dollar sign), if you actually want a dollar sign.
 
-.D
+>>>
 ## That progressive hidy thingie
 
-If you want to hide the next chuck, put a .D on a separate line.
+If you want to hide the next chuck, put a >>> on a separate line.
 Probably want to add an empty line, but really it is a new html division,
 so it will always include a new paragraph.
-So .D cannot really split up paragraphs or displayed math.  If you want to do that you have to just do separate displayed math.  So you can't split aligned,
+So >>> cannot really split up paragraphs or displayed math.  If you want to do that you have to just do separate displayed math.  So you can't split aligned,
 etc., but we don't want to get too fancy here.
 
-.D
+>>>
 ## Using HTML
 
 You can really just include html: <tt>foo</tt> or <b>foo</b>.
 But you probably shouldn't get too crazy.  Links, images, etc.
 it should all work.
+Though there is a quick way to do centered nice images.
 
-.D
+>>>
 ## Running
 
 Best to just stick <tt>quickpres.pl</tt> into the directory where
 your file is.  Then run (if on Linux) <tt>./quickpres.pl</tt>,
 which will compile <tt>pres.prs</tt> into <tt>pres.html</tt>.
 
-.D
+>>>
 You can specify the files by: <tt>./quickpres.pl in.prs out.html</tt>.
 
-.D
+>>>
 Adding -a, that is <tt>./quickpres.pl -a in.prs out.html</tt> or
 <tt>./quickpres.pl -a</tt> will just show all the
 blocks all at once.
 
-.D
+>>>
 ## Headers
 
 Use # for first level headers, ## for second level and ### for third level:
@@ -72,17 +83,47 @@ Use # for first level headers, ## for second level and ### for third level:
 ## Second
 ### Third
 
-.D
+>>>
+# Bullet lists
+
+* Bullet lists
+>>>
+* are done
+* similar
+* to markdown with stars.
+
+But the star can't come in the middle of
+a paragraph:
+* this is not a bullet
+
+* this is a bullet
+
+* If you want a long bullet point, it must all come on one line.
+This line will be separate.  Yeah, I could code it to be smarter,
+but ... too lazy.
+
+>>>
+# Images
+
+On a new line add !(img.png) to insert img.png, you can add
+alt text with ![alt text](img.png)
+
+!(sampleimg.png)
+
+And now with alt text:
+
+![Alt text](sampleimg.png)
+
+>>>
 ## Empty space
 
-You can add a bit of empty space with .E on an empty line
+You can add a bit of empty space with ___ on an empty line
 
-.E
+___
 
 see ... there's empty space.
 
-.D
-
+>>>
 ## That's it
 
 There's always a chunk of empty space added behind the presentation so

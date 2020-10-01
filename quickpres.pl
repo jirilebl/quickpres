@@ -26,12 +26,77 @@ print "reading: $infile    writing: $outfile    all at once: $allatonce\n";
 open(my $in,'<', "pres.prs") or die $!; 
 open(my $out, '>' ,"pres.html") or die $!; 
 
+my $indiv = 0;
+my $dopar = 0;
+my $gottitle = 0;
+
+my $title = "Presentation";
+
+my $outstr;
+
+# No \input file reading here (FIXME?)
+while($line = <$in>)
+{
+	chomp($line);
+	$line =~ s/^\s+//;
+	$line =~ s/\s+$//;
+	if ($line =~ s/^###\s*//) {
+		$outstr .= "<h3>$line</h3>\n";
+		$dopar = 1;
+	} elsif ($line =~ s/^##\s*//) {
+		$outstr .= "<h2>$line</h2>\n";
+		$dopar = 1;
+	} elsif ($line =~ s/^#\s*//) {
+		if ($gottitle == 0) {
+			$gottitle = 1;
+			$title = $line;
+		}
+		$outstr .= "<h1>$line</h1>\n";
+		$dopar = 1;
+	} elsif ($dopar == 1 and $line =~ s/^[*]\s*//) {
+		$outstr .= "<ul><li>$line</ul>\n";
+		$dopar = 1;
+	} elsif ($line =~ m/^[!][(](.*)[)]$/) {
+		$outstr .= "<p><img class=\"cimage\" src=\"$1\">\n";
+		$dopar = 1;
+	} elsif ($line =~ m/^[!]\[([^]]*)\][(](.*)[)]$/) {
+		$outstr .= "<p><img class=\"cimage\" src=\"$2\" alt=\"$1\">\n";
+		$dopar = 1;
+	} elsif ($line =~ m/^$/) {
+		$dopar = 1;
+	} elsif ($line =~ m/^___$/) {
+		$outstr .= "<div style=\"height:2in;\"></div>\n";
+		$dopar = 1;
+	} elsif ($line =~ m/^>>>$/) {
+		if ($indiv == 1) { 
+			$outstr .= "</div>\n";
+		}
+		if ($allatonce == 1) {
+			$outstr .= "<div class=\"content\">\n";
+		} else {
+			$outstr .= "<div class=\"content\" style=\"display:none;\">\n";
+		}
+		$indiv = 1;
+		$dopar = 1;
+	} else {
+		if ($dopar == 1) {
+			$outstr .= "<p>\n";
+		}
+		$dopar = 0;
+		$outstr .= "$line\n";
+	}
+}
+
+if ($indiv == 1) { 
+	$outstr .= "</div>\n";
+}
+
 print $out <<END;
 <!doctype html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Presentation</title>
+<title>$title</title>
 <link rel="stylesheet" type="text/css" href="style.css"> 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -62,6 +127,7 @@ div.centered {text-align:center;}
 h1 {text-align:left;}
 h2 {text-align:left;}
 h3 {text-align:left;}
+.cimage { display:block; max-width: 90%; margin-left: auto; margin-right: auto; }
 \@media screen {
  div.thebody {margin-top:20px; margin-left: 5%; margin-right:5%; max-width:1100px;}
  h3 {margin-left:-2%;}
@@ -78,7 +144,7 @@ MathJax = {
   }
 };
 </script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> 
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6%2CscrollIntoView"></script> 
 <script id="MathJax-script" async 
  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"> 
 </script> 
@@ -90,14 +156,39 @@ END
 if ($allatonce == 0) {
 print $out <<END;
 <script>
+function doenter() {
+  var rect = \$("#enddiv")[0].getBoundingClientRect();
+
+  if(rect.top >= 0 && rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8) {
+    \$elt = \$( ".content:hidden" ).first();
+    \$elt.fadeIn( "slow" );
+  } else {
+    window.scrollBy({ 
+      top: 120, // could be negative value
+      left: 0, 
+      behavior: 'smooth' 
+    });
+  }
+}
 \$( document.body ).click(function() {
-  \$( ".content:hidden" ).first().fadeIn( "slow" );
+  doenter();
 });
 \$( document.body ).keydown(function( event ) {
-  if (event.which == 74 || event.which == 13) {
+  if (event.key == "j") {
     \$( ".content:hidden" ).first().fadeIn( "slow" );
-  } else if ( event.which == 8  || event.which == 75) {
+  } else if ( event.key == "k" ) {
     \$( ".content:visible" ).last().fadeOut( "slow" );
+  } else if (event.key == "J") {
+    \$elt = \$( ".content:hidden" ).first();
+    \$elt.fadeIn( "slow" );
+    \$elt[0].scrollIntoView({ behavior: "smooth", block: "start" });
+  } else if (event.key == "Enter") {
+    doenter();
+  } else if (event.key == "K"  || event.key == "Backspace") {
+    \$( ".content:visible" ).last().fadeOut( "slow" );
+    \$("#enddiv")[0].scrollIntoView({ behavior: "smooth", block: "end" });
+  } else if ( event.which == 69) {
+    \$("#enddiv")[0].scrollIntoView({ behavior: "smooth", block: "end" });
   }
 });
 </script>
@@ -108,50 +199,11 @@ print $out <<END;
 <div class=thebody>
 END
 
-my $indiv = 0;
-my $dopar = 0;
-
-# No \input file reading here (FIXME?)
-while($line = <$in>)
-{
-	chomp($line);
-	$line =~ s/^\s+//;
-	$line =~ s/\s+$//;
-	if ($line =~ s/^###\s*//) {
-		print $out "<h3>$line</h3>\n";
-	} elsif ($line =~ s/^##\s*//) {
-		print $out "<h2>$line</h2>\n";
-	} elsif ($line =~ s/^#\s*//) {
-		print $out "<h1>$line</h1>\n";
-	} elsif ($line =~ m/^$/) {
-		$dopar = 1;
-	} elsif ($line =~ m/^\.E$/) {
-		print $out "<div style=\"height:2in;\"></div>\n";
-	} elsif ($line =~ m/^\.D$/) {
-		if ($indiv == 1) { 
-			print $out "</div>\n";
-		}
-		if ($allatonce == 1) {
-			print $out "<div class=\"content\">\n";
-		} else {
-			print $out "<div class=\"content\" style=\"display:none;\">\n";
-		}
-		$indiv = 1;
-	} else {
-		if ($dopar == 1) {
-			print $out "<p>\n";
-		}
-		$dopar = 0;
-		print $out "$line\n";
-	}
-}
-
-if ($indiv == 1) { 
-	print $out "</div>\n";
-}
+print $out $outstr;
 
 print $out <<END;
 
+<div id="enddiv">&nbsp;</div>
 <div style="height:10in;"></div>
 
 </div>
