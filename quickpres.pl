@@ -100,6 +100,7 @@ print $out <<END;
 <link rel="stylesheet" type="text/css" href="style.css"> 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
+html { scroll-behavior: smooth; }
 span.smaller {font-size:80%;}
 span.tiny {font-size:60%;}
 span.larger {font-size:120%;}
