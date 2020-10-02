@@ -56,6 +56,12 @@ while($line = <$in>)
 	} elsif ($dopar == 1 and $line =~ s/^[*]\s*//) {
 		$outstr .= "<ul><li>$line</ul>\n";
 		$dopar = 1;
+	} elsif ($line =~ m/^[(](http.*)[)]$/) {
+		$outstr .= "<p><a href=\"$1\">$1</a>\n";
+		$dopar = 1;
+	} elsif ($line =~ m/^\[([^]]*)\][(](http.*)[)]$/) {
+		$outstr .= "<p><a href=\"$2\">$1</a>\n";
+		$dopar = 1;
 	} elsif ($line =~ m/^[!][(](.*)[)]$/) {
 		$outstr .= "<p><img class=\"cimage\" src=\"$1\">\n";
 		$dopar = 1;
