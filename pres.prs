@@ -2,14 +2,14 @@
 
 HTML scrolling presentation for math classes, with syntax mildly inspired by Markdown
 
-Press j or Enter to see what comes next ...
+Press j, J, n, or Enter to see what comes next ...
 
 >>>
 ## How to use
 
-You saw you press j or Enter to see what comes next, but there are some differences in scrolling.
+You saw you press j, J, n, or Enter to see what comes next, but there are some differences in scrolling.
 
-* Enter will slowly scroll until it finds something to unhide then it unhides it.  Probably this is the way to go through the presentation.
+* n or Enter will slowly scroll until it finds something to unhide then it unhides it.  Probably this is the way to go through the presentation.
 * j simply unhides the next thing hidden without scrolling.
 * k will hide the last thing
 * Backspace will hide the last thing and scroll to the end.

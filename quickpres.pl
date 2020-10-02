@@ -199,12 +199,12 @@ function doenter() {
     \$elt = \$( ".content:hidden" ).first();
     \$elt.fadeIn( "slow" );
     \$elt[0].scrollIntoView({ behavior: "smooth", block: "start" });
-  } else if (event.key == "Enter") {
+  } else if (event.key == "n" || event.key == "Enter") {
     doenter();
   } else if (event.key == "K"  || event.key == "Backspace") {
     \$( ".content:visible" ).last().fadeOut( "slow" );
     \$("#enddiv")[0].scrollIntoView({ behavior: "smooth", block: "end" });
-  } else if ( event.which == 69) {
+  } else if ( event.key == "e") {
     \$("#enddiv")[0].scrollIntoView({ behavior: "smooth", block: "end" });
   }
 });
@@ -221,7 +221,7 @@ print $out $outstr;
 print $out <<END;
 
 <div id="enddiv">&nbsp;</div>
-<div style="height:10in;"></div>
+<div style="height:3in;"></div>
 
 </div>
 

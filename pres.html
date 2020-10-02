@@ -86,12 +86,12 @@ $( document.body ).keydown(function( event ) {
     $elt = $( ".content:hidden" ).first();
     $elt.fadeIn( "slow" );
     $elt[0].scrollIntoView({ behavior: "smooth", block: "start" });
-  } else if (event.key == "Enter") {
+  } else if (event.key == "n" || event.key == "Enter") {
     doenter();
   } else if (event.key == "K"  || event.key == "Backspace") {
     $( ".content:visible" ).last().fadeOut( "slow" );
     $("#enddiv")[0].scrollIntoView({ behavior: "smooth", block: "end" });
-  } else if ( event.which == 69) {
+  } else if ( event.key == "e") {
     $("#enddiv")[0].scrollIntoView({ behavior: "smooth", block: "end" });
   }
 });
@@ -101,12 +101,12 @@ $( document.body ).keydown(function( event ) {
 <p>
 HTML scrolling presentation for math classes, with syntax mildly inspired by Markdown
 <p>
-Press j or Enter to see what comes next ...
+Press j, J, n, or Enter to see what comes next ...
 <div class="content" style="display:none;">
 <h2>How to use</h2>
 <p>
-You saw you press j or Enter to see what comes next, but there are some differences in scrolling.
-<ul><li>Enter will slowly scroll until it finds something to unhide then it unhides it.  Probably this is the way to go through the presentation.</ul>
+You saw you press j, J, n, or Enter to see what comes next, but there are some differences in scrolling.
+<ul><li>n or Enter will slowly scroll until it finds something to unhide then it unhides it.  Probably this is the way to go through the presentation.</ul>
 <ul><li>j simply unhides the next thing hidden without scrolling.</ul>
 <ul><li>k will hide the last thing</ul>
 <ul><li>Backspace will hide the last thing and scroll to the end.</ul>
@@ -259,7 +259,7 @@ that you can scroll your ending to the middle easily.
 </div>
 
 <div id="enddiv">&nbsp;</div>
-<div style="height:10in;"></div>
+<div style="height:3in;"></div>
 
 </div>
 
