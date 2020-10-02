@@ -166,7 +166,11 @@ print $out <<END;
 function doenter() {
   var rect = \$("#enddiv")[0].getBoundingClientRect();
 
-  if(rect.top >= 0 && rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8) {
+  if(rect.top <= 0) {
+    \$elt = \$( ".content:hidden" ).first();
+    \$elt.fadeIn( "slow" );
+    \$elt[0].scrollIntoView({ behavior: "smooth", block: "start" });
+  } else if(rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8) {
     \$elt = \$( ".content:hidden" ).first();
     \$elt.fadeIn( "slow" );
   } else {
