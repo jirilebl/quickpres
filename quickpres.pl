@@ -70,6 +70,9 @@ while($line = <$in>)
 		$dopar = 1;
 	} elsif ($line =~ m/^$/) {
 		$dopar = 1;
+	} elsif ($line =~ m/^---$/) {
+		$outstr .= "<hr>\n";
+		$dopar = 1;
 	} elsif ($line =~ m/^___$/) {
 		$outstr .= "<div style=\"height:2in;\"></div>\n";
 		$dopar = 1;
@@ -181,9 +184,6 @@ function doenter() {
     });
   }
 }
-\$( document.body ).click(function() {
-  doenter();
-});
 \$( document.body ).keydown(function( event ) {
   if (event.key == "j") {
     \$( ".content:hidden" ).first().fadeIn( "slow" );

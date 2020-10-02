@@ -62,7 +62,11 @@ MathJax = {
 function doenter() {
   var rect = $("#enddiv")[0].getBoundingClientRect();
 
-  if(rect.top >= 0 && rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8) {
+  if(rect.top <= 0) {
+    $elt = $( ".content:hidden" ).first();
+    $elt.fadeIn( "slow" );
+    $elt[0].scrollIntoView({ behavior: "smooth", block: "start" });
+  } else if(rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8) {
     $elt = $( ".content:hidden" ).first();
     $elt.fadeIn( "slow" );
   } else {
@@ -73,9 +77,6 @@ function doenter() {
     });
   }
 }
-$( document.body ).click(function() {
-  doenter();
-});
 $( document.body ).keydown(function( event ) {
   if (event.key == "j") {
     $( ".content:hidden" ).first().fadeIn( "slow" );
@@ -100,12 +101,12 @@ $( document.body ).keydown(function( event ) {
 <p>
 HTML scrolling presentation for math classes, with syntax mildly inspired by Markdown
 <p>
-Press j, Enter, or just click on the page to see what comes next ...
+Press j or Enter to see what comes next ...
 <div class="content" style="display:none;">
 <h2>How to use</h2>
 <p>
-You saw j, Enter, or clicking to see what comes next, but there are some differences in scrolling.
-<ul><li>Enter will slowly scroll until it finds something to unhide then it unhides it, clicking does the same thing.  Probably this is the way to go through the presentation.</ul>
+You saw you press j or Enter to see what comes next, but there are some differences in scrolling.
+<ul><li>Enter will slowly scroll until it finds something to unhide then it unhides it.  Probably this is the way to go through the presentation.</ul>
 <ul><li>j simply unhides the next thing hidden without scrolling.</ul>
 <ul><li>k will hide the last thing</ul>
 <ul><li>Backspace will hide the last thing and scroll to the end.</ul>
@@ -224,9 +225,18 @@ Or if you want to have some text then [text](http://link)
 <p><a href="http://www.google.com">text</a>
 </div>
 <div class="content" style="display:none;">
+<h2>Horizontal rule</h2>
+<p>
+Just do --- on an separete line
+<hr>
+<p>
+This is between rules.
+<hr>
+</div>
+<div class="content" style="display:none;">
 <h2>Empty space</h2>
 <p>
-You can add a bit of empty space with ___ on an empty line
+You can add a bit of empty space with ___ on an separate line
 <div style="height:2in;"></div>
 <p>
 see ... there's empty space.

@@ -2,14 +2,14 @@
 
 HTML scrolling presentation for math classes, with syntax mildly inspired by Markdown
 
-Press j, Enter, or just click on the page to see what comes next ...
+Press j or Enter to see what comes next ...
 
 >>>
 ## How to use
 
-You saw j, Enter, or clicking to see what comes next, but there are some differences in scrolling.
+You saw you press j or Enter to see what comes next, but there are some differences in scrolling.
 
-* Enter will slowly scroll until it finds something to unhide then it unhides it, clicking does the same thing.  Probably this is the way to go through the presentation.
+* Enter will slowly scroll until it finds something to unhide then it unhides it.  Probably this is the way to go through the presentation.
 * j simply unhides the next thing hidden without scrolling.
 * k will hide the last thing
 * Backspace will hide the last thing and scroll to the end.
@@ -128,9 +128,18 @@ Or if you want to have some text then [text](http://link)
 [text](http://www.google.com)
 
 >>>
+## Horizontal rule
+
+Just do --- on an separete line
+
+---
+This is between rules.
+---
+
+>>>
 ## Empty space
 
-You can add a bit of empty space with ___ on an empty line
+You can add a bit of empty space with ___ on an separate line
 
 ___
 
