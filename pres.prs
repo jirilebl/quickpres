@@ -137,6 +137,16 @@ This is between rules.
 ---
 
 >>>
+## Bold
+
+A slightly less general than markdown, you can use underscores to bold
+a piece of text, but it must appear on a separate line _this_ doesn't
+do it, but
+_this_
+does.  It can be, as you can see in the middle of a paragraph, but it has
+to be a separate line.
+
+>>>
 ## Empty space
 
 You can add a bit of empty space with ___ on an separate line

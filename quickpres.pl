@@ -87,6 +87,12 @@ while($line = <$in>)
 		}
 		$indiv = 1;
 		$dopar = 1;
+	} elsif ($line =~ m/^_([^_].*)_$/) {
+		if ($dopar == 1) {
+			$outstr .= "<p>\n";
+		}
+		$dopar = 0;
+		$outstr .= "<b>$1</b>\n";
 	} else {
 		if ($dopar == 1) {
 			$outstr .= "<p>\n";
@@ -122,7 +128,7 @@ ul {margin-left:0px; padding-left:1em; list-style:square;}
 body { 
 	font-family: Tex Gyre Pagella, Palatino, URW Palladio L, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;
         line-height: 1.5;
-	font-size: 220%;
+	font-size: 180%;
 	background-color:#ffffff;
 	color:#000000; 
 }
