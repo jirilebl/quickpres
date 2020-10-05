@@ -121,7 +121,8 @@ So this is a new paragraph.
 But this line is still in the second paragraph, even though we put a
 linebreak.  Just not an empty line.
 <p>
-To simply break lines without any space, put \\ on a separate line:
+To simply break lines without any space, put two backslashes
+on a separate line:
 <p class="noskip">
 a) this is good for faking short lists
 <p class="noskip">
@@ -130,14 +131,15 @@ b) or whatnot.
 <div class="content" style="display:none;">
 <h2>Math</h2>
 <p>
-Math is done with MathJax.  For display math:
+Math is done with MathJax.  For display math use the double
+dollar signs:
 $$
 \int_0^1 x^2 \, dx
 $$
 </div>
 <div class="content" style="display:none;">
 <p class="noskip">
-Or
+Or the backslash square bracket notation
 <p>
 \[
 \sum_{n=1}^\infty \frac{1}{n} .
@@ -147,12 +149,17 @@ Or
 </div>
 <div class="content" style="display:none;">
 <p>
-Or you can do inline math with $x^2$ or \(\sqrt{2}\).
+Or you can do inline math with $x^2$ or \(\sqrt{2}\), that is,
+dollar signs or the backslash round bracket.
 </div>
 <div class="content" style="display:none;">
 <p>
 Due to the inline math using the dollar sign you need to escape it with
-a slash, \$ (in the presentation you just see a dollar sign), if you actually want a dollar sign.
+a slash, \$ (in the presentation you just see a dollar sign),
+if you actually want a dollar sign.
+Due to this you'll actually need to enter a backslash as
+two backslashes: \\.  (But see below about two backslashes on
+a separate line)
 </div>
 <div class="content" style="display:none;">
 <h2>That progressive hidy thingie</h2>
@@ -277,7 +284,7 @@ that you can scroll your ending to the middle easily.
 </div>
 
 <div id="enddiv">&nbsp;</div>
-<div style="height:3in;"></div>
+<div style="height:6in;"></div>
 
 </div>
 

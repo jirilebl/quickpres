@@ -268,7 +268,7 @@ print $out $outstr;
 print $out <<END;
 
 <div id="enddiv">&nbsp;</div>
-<div style="height:3in;"></div>
+<div style="height:6in;"></div>
 
 </div>
 
