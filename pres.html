@@ -5,6 +5,18 @@
 <title>quickpres</title>
 <link rel="stylesheet" type="text/css" href="style.css"> 
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$','$'],['\\(','\\)']]
+  }
+};
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6%2CscrollIntoView"></script> 
+<script id="MathJax-script" async 
+ src="https://cdn.jsdelivr.net/npm/mathjax/es5/tex-chtml.js"> 
+</script> 
 <style>
 html { scroll-behavior: smooth; }
 span.smaller {font-size:80%;}
@@ -15,7 +27,6 @@ span.tt {font-family: Courier, "Courier New", monospace;}
 h1 {font-size:180%; font-weight:bold;}
 h2 {font-size:120%; font-weight:bold;}
 h3 {font-size:100%; font-weight:bold;}
-ul {margin-left:0px; padding-left:1em; list-style:square;}
 body { 
 	font-family: Tex Gyre Pagella, Palatino, URW Palladio L, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;
         line-height: 1.5;
@@ -35,26 +46,17 @@ h1 {text-align:left;}
 h2 {text-align:left;}
 h3 {text-align:left;}
 .cimage { display:block; max-width: 90%; margin-left: auto; margin-right: auto; }
-@media screen {
- div.thebody {margin-top:20px; margin-left: 5%; margin-right:5%; max-width:1100px;}
- h3 {margin-left:-2%;}
- h2 {margin-left:-2%;}
- h1 {margin-left:-2%;}
- p.left {margin-left:-2%;}
-}
+div.thebody {margin-top:20px; margin-left: 5%; margin-right:5%; max-width:1100px;}
+h3 {margin-left:-2%;}
+h2 {margin-left:-2%;}
+h1 {margin-left:-2%;}
+p.left {margin-left:-2%;}
+p { margin-bottom:0px; margin-top:20px; }
+p.noskip { margin-top:0px; }
+ul { margin-top:0px; margin-bottom:0px; margin-left:0px; padding-left:1em; list-style:square;}
+hr { margin-bottom:20px; margin-top:20px; }
+mjx-container { margin:0px !important; }
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-MathJax = {
-  tex: {
-    inlineMath: [['$','$'],['\\(','\\)']]
-  }
-};
-</script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6%2CscrollIntoView"></script> 
-<script id="MathJax-script" async 
- src="https://cdn.jsdelivr.net/npm/mathjax/es5/tex-chtml.js"> 
-</script> 
 </head>
 
 <body>
@@ -128,11 +130,14 @@ $$
 $$
 </div>
 <div class="content" style="display:none;">
-<p>
+<p class="noskip">
 Or
+<p>
 \[
 \sum_{n=1}^\infty \frac{1}{n} .
 \]
+<p>
+(leave an empty line for more space)
 </div>
 <div class="content" style="display:none;">
 <p>
@@ -201,7 +206,7 @@ a paragraph:
 * this is not a bullet
 <ul><li>this is a bullet</ul>
 <ul><li>If you want a long bullet point, it must all come on one line.</ul>
-<p>
+<p class="noskip">
 This line will be separate.  Yeah, I could code it to be smarter,
 but ... too lazy.
 </div>
@@ -210,24 +215,31 @@ but ... too lazy.
 <p>
 On a new line add !(img.png) to insert img.png, you can add
 alt text with ![alt text](img.png)
-<p><img class="cimage" src="sampleimg.png">
+<p>
+<img class="cimage" src="sampleimg.png">
 <p>
 And now with alt text:
-<p><img class="cimage" src="sampleimg.png" alt="Alt text">
+<p>
+<img class="cimage" src="sampleimg.png" alt="Alt text">
 </div>
 <div class="content" style="display:none;">
 <h2>Links</h2>
 <p>
 Quick links can be added on a separate line as (http://link)
-<p><a href="http://www.google.com">http://www.google.com</a>
+<p>
+<a href="http://www.google.com">http://www.google.com</a>
 <p>
 Or if you want to have some text then [text](http://link)
-<p><a href="http://www.google.com">text</a>
+<p class="noskip">
+<a href="http://www.google.com">text</a>
+<p class="noskip">
+Also notice there is less space around this link since we didn't leave an
+empty line around it.
 </div>
 <div class="content" style="display:none;">
 <h2>Horizontal rule</h2>
 <p>
-Just do --- on an separete line
+Just do --- on an separate line
 <hr>
 <p>
 This is between rules.

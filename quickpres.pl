@@ -23,11 +23,12 @@ if (not defined $outfile) {
 
 print "reading: $infile    writing: $outfile    all at once: $allatonce\n";
 
-open(my $in,'<', "pres.prs") or die $!; 
-open(my $out, '>' ,"pres.html") or die $!; 
+open(my $in,'<', $infile) or die $!; 
+open(my $out, '>', $outfile) or die $!; 
 
 my $indiv = 0;
 my $dopar = 0;
+my $skippar = 0;
 my $gottitle = 0;
 
 my $title = "Presentation";
@@ -43,9 +44,11 @@ while($line = <$in>)
 	if ($line =~ s/^###\s*//) {
 		$outstr .= "<h3>$line</h3>\n";
 		$dopar = 1;
+		$skippar = 1;
 	} elsif ($line =~ s/^##\s*//) {
 		$outstr .= "<h2>$line</h2>\n";
 		$dopar = 1;
+		$skippar = 1;
 	} elsif ($line =~ s/^#\s*//) {
 		if ($gottitle == 0) {
 			$gottitle = 1;
@@ -53,29 +56,58 @@ while($line = <$in>)
 		}
 		$outstr .= "<h1>$line</h1>\n";
 		$dopar = 1;
+		$skippar = 1;
 	} elsif ($dopar == 1 and $line =~ s/^[*]\s*//) {
 		$outstr .= "<ul><li>$line</ul>\n";
 		$dopar = 1;
+		$skippar = 0;
 	} elsif ($line =~ m/^[(](http.*)[)]$/) {
-		$outstr .= "<p><a href=\"$1\">$1</a>\n";
+		if ($dopar == 1 and $skippar == 1) {
+			$outstr .= "<p>\n";
+		} else {
+			$outstr .= "<p class=\"noskip\">\n";
+		}
+		$outstr .= "<a href=\"$1\">$1</a>\n";
 		$dopar = 1;
+		$skippar = 0;
 	} elsif ($line =~ m/^\[([^]]*)\][(](http.*)[)]$/) {
-		$outstr .= "<p><a href=\"$2\">$1</a>\n";
+		if ($dopar == 1 and $skippar == 1) {
+			$outstr .= "<p>\n";
+		} else {
+			$outstr .= "<p class=\"noskip\">\n";
+		}
+		$outstr .= "<a href=\"$2\">$1</a>\n";
 		$dopar = 1;
+		$skippar = 0;
 	} elsif ($line =~ m/^[!][(](.*)[)]$/) {
-		$outstr .= "<p><img class=\"cimage\" src=\"$1\">\n";
+		if ($dopar == 1 and $skippar == 1) {
+			$outstr .= "<p>\n";
+		} else {
+			$outstr .= "<p class=\"noskip\">\n";
+		}
+		$outstr .= "<img class=\"cimage\" src=\"$1\">\n";
 		$dopar = 1;
+		$skippar = 0;
 	} elsif ($line =~ m/^[!]\[([^]]*)\][(](.*)[)]$/) {
-		$outstr .= "<p><img class=\"cimage\" src=\"$2\" alt=\"$1\">\n";
+		if ($dopar == 1 and $skippar == 1) {
+			$outstr .= "<p>\n";
+		} else {
+			$outstr .= "<p class=\"noskip\">\n";
+		}
+		$outstr .= "<img class=\"cimage\" src=\"$2\" alt=\"$1\">\n";
 		$dopar = 1;
+		$skippar = 0;
 	} elsif ($line =~ m/^$/) {
 		$dopar = 1;
+		$skippar = 1;
 	} elsif ($line =~ m/^---$/) {
 		$outstr .= "<hr>\n";
 		$dopar = 1;
+		$skippar = 1;
 	} elsif ($line =~ m/^___$/) {
 		$outstr .= "<div style=\"height:2in;\"></div>\n";
 		$dopar = 1;
+		$skippar = 0;
 	} elsif ($line =~ m/^>>>$/) {
 		if ($indiv == 1) { 
 			$outstr .= "</div>\n";
@@ -89,15 +121,25 @@ while($line = <$in>)
 		$dopar = 1;
 	} elsif ($line =~ m/^_([^_].*)_$/) {
 		if ($dopar == 1) {
-			$outstr .= "<p>\n";
+			if ($skippar == 1) {
+				$outstr .= "<p>\n";
+			} else {
+				$outstr .= "<p class=\"noskip\">\n";
+			}
 		}
 		$dopar = 0;
+		$skippar = 0;
 		$outstr .= "<b>$1</b>\n";
 	} else {
 		if ($dopar == 1) {
-			$outstr .= "<p>\n";
+			if ($skippar == 1) {
+				$outstr .= "<p>\n";
+			} else {
+				$outstr .= "<p class=\"noskip\">\n";
+			}
 		}
 		$dopar = 0;
+		$skippar = 0;
 		$outstr .= "$line\n";
 	}
 }
@@ -114,6 +156,18 @@ print $out <<END;
 <title>$title</title>
 <link rel="stylesheet" type="text/css" href="style.css"> 
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['\$','\$'],['\\\\(','\\\\)']]
+  }
+};
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6%2CscrollIntoView"></script> 
+<script id="MathJax-script" async 
+ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"> 
+</script> 
 <style>
 html { scroll-behavior: smooth; }
 span.smaller {font-size:80%;}
@@ -124,7 +178,6 @@ span.tt {font-family: Courier, "Courier New", monospace;}
 h1 {font-size:180%; font-weight:bold;}
 h2 {font-size:120%; font-weight:bold;}
 h3 {font-size:100%; font-weight:bold;}
-ul {margin-left:0px; padding-left:1em; list-style:square;}
 body { 
 	font-family: Tex Gyre Pagella, Palatino, URW Palladio L, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;
         line-height: 1.5;
@@ -144,26 +197,17 @@ h1 {text-align:left;}
 h2 {text-align:left;}
 h3 {text-align:left;}
 .cimage { display:block; max-width: 90%; margin-left: auto; margin-right: auto; }
-\@media screen {
- div.thebody {margin-top:20px; margin-left: 5%; margin-right:5%; max-width:1100px;}
- h3 {margin-left:-2%;}
- h2 {margin-left:-2%;}
- h1 {margin-left:-2%;}
- p.left {margin-left:-2%;}
-}
+div.thebody {margin-top:20px; margin-left: 5%; margin-right:5%; max-width:1100px;}
+h3 {margin-left:-2%;}
+h2 {margin-left:-2%;}
+h1 {margin-left:-2%;}
+p.left {margin-left:-2%;}
+p { margin-bottom:0px; margin-top:20px; }
+p.noskip { margin-top:0px; }
+ul { margin-top:0px; margin-bottom:0px; margin-left:0px; padding-left:1em; list-style:square;}
+hr { margin-bottom:20px; margin-top:20px; }
+mjx-container { margin:0px !important; }
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-MathJax = {
-  tex: {
-    inlineMath: [['\$','\$'],['\\\\(','\\\\)']]
-  }
-};
-</script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6%2CscrollIntoView"></script> 
-<script id="MathJax-script" async 
- src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"> 
-</script> 
 </head>
 
 <body>

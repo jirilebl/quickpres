@@ -32,9 +32,13 @@ $$
 $$
 >>>
 Or
+
 \[
 \sum_{n=1}^\infty \frac{1}{n} .
 \]
+
+(leave an empty line for more space)
+
 >>>
 Or you can do inline math with $x^2$ or \(\sqrt{2}\).
 
@@ -124,13 +128,14 @@ Quick links can be added on a separate line as (http://link)
 (http://www.google.com)
 
 Or if you want to have some text then [text](http://link)
-
 [text](http://www.google.com)
+Also notice there is less space around this link since we didn't leave an
+empty line around it.
 
 >>>
 ## Horizontal rule
 
-Just do --- on an separete line
+Just do --- on an separate line
 
 ---
 This is between rules.
