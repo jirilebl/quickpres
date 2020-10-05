@@ -97,6 +97,9 @@ while($line = <$in>)
 		$outstr .= "<img class=\"cimage\" src=\"$2\" alt=\"$1\">\n";
 		$dopar = 1;
 		$skippar = 0;
+	} elsif ($line =~ m/^\\\\$/) {
+		$dopar = 1;
+		$skippar = 0;
 	} elsif ($line =~ m/^$/) {
 		$dopar = 1;
 		$skippar = 1;

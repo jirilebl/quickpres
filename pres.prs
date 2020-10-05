@@ -23,15 +23,24 @@ So this is a new paragraph.
 But this line is still in the second paragraph, even though we put a
 linebreak.  Just not an empty line.
 
+To simply break lines without any space, put two backslashes
+on a separate line:
+\\
+a) this is good for faking short lists
+\\
+b) or whatnot.
+
+
 >>>
 ## Math
 
-Math is done with MathJax.  For display math:
+Math is done with MathJax.  For display math use the double
+dollar signs:
 $$
 \int_0^1 x^2 \, dx
 $$
 >>>
-Or
+Or the backslash square bracket notation
 
 \[
 \sum_{n=1}^\infty \frac{1}{n} .
@@ -40,11 +49,16 @@ Or
 (leave an empty line for more space)
 
 >>>
-Or you can do inline math with $x^2$ or \(\sqrt{2}\).
+Or you can do inline math with $x^2$ or \(\sqrt{2}\), that is,
+dollar signs or the backslash round bracket.
 
 >>>
 Due to the inline math using the dollar sign you need to escape it with
-a slash, \$ (in the presentation you just see a dollar sign), if you actually want a dollar sign.
+a slash, \$ (in the presentation you just see a dollar sign),
+if you actually want a dollar sign.
+Due to this you'll actually need to enter a backslash as
+two backslashes: \\.  (But see below about two backslashes on
+a separate line)
 
 >>>
 ## That progressive hidy thingie
