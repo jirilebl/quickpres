@@ -116,7 +116,7 @@ But the star can't come in the middle of
 a paragraph:
 * this is not a bullet
 
-* this is a bullet
+* this is a bullet (with some leading space)
 
 * If you want a long bullet point, it must all come on one line.
 This line will be separate.  Yeah, I could code it to be smarter,
@@ -164,6 +164,10 @@ do it, but
 _this_
 does.  It can be, as you can see in the middle of a paragraph, but it has
 to be a separate line.
+Other text can come after the second underscore like
+_this_ as long as there are no more underscores.  This is
+useful for putting punctuation after bold, or whenever you don't want
+to leave a space right after bold.
 
 >>>
 ## Empty space

@@ -58,6 +58,9 @@ while($line = <$in>)
 		$dopar = 1;
 		$skippar = 1;
 	} elsif ($dopar == 1 and $line =~ s/^[*]\s*//) {
+		if ($skippar == 1) {
+			$outstr .= "<p>\n";
+		}
 		$outstr .= "<ul><li>$line</ul>\n";
 		$dopar = 1;
 		$skippar = 0;
@@ -122,7 +125,7 @@ while($line = <$in>)
 		}
 		$indiv = 1;
 		$dopar = 1;
-	} elsif ($line =~ m/^_([^_].*)_$/) {
+	} elsif ($line =~ m/^_([^_][^_]*)_([^_]*)$/) {
 		if ($dopar == 1) {
 			if ($skippar == 1) {
 				$outstr .= "<p>\n";
@@ -132,7 +135,7 @@ while($line = <$in>)
 		}
 		$dopar = 0;
 		$skippar = 0;
-		$outstr .= "<b>$1</b>\n";
+		$outstr .= "<b>$1</b>$2\n";
 	} else {
 		if ($dopar == 1) {
 			if ($skippar == 1) {
