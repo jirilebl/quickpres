@@ -11,11 +11,13 @@ You saw you press j, J, n, or Enter to see what comes next, but there are some d
 
 * n or Enter will slowly scroll until it finds something to unhide.   If there is something to unhide closer to the middle of the page, it unhides it without scrolling.  This is probably the way to go through the presentation.
 * j simply unhides the next hidden bit without scrolling.  So you can use this in conjunction with the arrow keys or spacebar to scroll.
-* k will hide the last thing
-* Backspace will hide the last thing and scroll to the end.
+* k will hide the last thing without scrolling.
+* J (shift-j) will unhide the next thing and also scroll it into view.  Could be used as the main presentation stepper, but make sure to have blocks that fit on one screen.
+* Backspace or K (shift-k) will hide the last thing and scroll to the end.
 * e will scroll to the end (the End key scrolls a bit too far).
 * A (that is, shift-a) will show all the blocks (the entire presentation) at once.  You can hide them all by reloading the page (F5 usually).
 
+>>>
 ## Syntax
 
 New paragraphs are entered just by leaving an empty line.
@@ -133,11 +135,10 @@ but ... too lazy.
 
 On a new line add !(img.png) to insert img.png, you can add
 alt text with ![alt text](img.png)
-
 !(sampleimg.png)
 
+>>>
 And now with alt text:
-
 ![Alt text](sampleimg.png)
 
 >>>
@@ -178,7 +179,7 @@ to leave a space right after bold.
 >>>
 ## Empty space
 
-You can add a bit of empty space with ___ on an separate line
+You can add a bit of empty space (for perhaps drawing or something) with ___ (three undersccores) on an separate line
 
 ___
 

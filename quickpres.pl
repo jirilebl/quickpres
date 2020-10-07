@@ -122,9 +122,9 @@ while($line = <$in>)
 			$outstr .= "</div>\n";
 		}
 		if ($allatonce == 1) {
-			$outstr .= "<div class=\"content\">\n";
+			$outstr .= "<div class=\"qpcontent\">\n";
 		} else {
-			$outstr .= "<div class=\"content\" style=\"display:none;\">\n";
+			$outstr .= "<div class=\"qpcontent\" style=\"display:none;\">\n";
 		}
 		$indiv = 1;
 		$dopar = 1;
@@ -206,7 +206,7 @@ h1 {text-align:left;}
 h2 {text-align:left;}
 h3 {text-align:left;}
 .cimage { display:block; max-width: 90%; margin-left: auto; margin-right: auto; }
-div.thebody {margin-top:20px; margin-left: 5%; margin-right:5%; max-width:1100px;}
+div#thebody {margin-top:20px; margin-left: 5%; margin-right:5%; max-width:1100px;}
 h3 {margin-left:-2%;}
 h2 {margin-left:-2%;}
 h1 {margin-left:-2%;}
@@ -216,6 +216,14 @@ p.noskip { margin-top:0px; }
 ul { margin-top:0px; margin-bottom:0px; margin-left:0px; padding-left:1em; list-style:square;}
 hr { margin-bottom:20px; margin-top:20px; }
 mjx-container { margin:0px !important; }
+\@media print {
+  #endspacediv { display:none; }
+  #endspan { display:none; }
+}
+\@media screen {
+  #endspacediv { height:6in; }
+}
+#logo { font-size:40%; color:gray; text-align:right;}
 </style>
 </head>
 
@@ -226,14 +234,14 @@ if ($allatonce == 0) {
 print $out <<END;
 <script>
 function doenter() {
-  var rect = \$("#enddiv")[0].getBoundingClientRect();
+  var rect = \$("#endspan")[0].getBoundingClientRect();
 
   if(rect.top <= 0) {
-    \$elt = \$( ".content:hidden" ).first();
+    \$elt = \$( ".qpcontent:hidden" ).first();
     \$elt.fadeIn( "slow" );
     \$elt[0].scrollIntoView({ behavior: "smooth", block: "start" });
   } else if(rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8) {
-    \$elt = \$( ".content:hidden" ).first();
+    \$elt = \$( ".qpcontent:hidden" ).first();
     \$elt.fadeIn( "slow" );
   } else {
     window.scrollBy({ 
@@ -245,22 +253,27 @@ function doenter() {
 }
 \$( document.body ).keydown(function( event ) {
   if (event.key == "A") {
-    \$( ".content:hidden" ).fadeIn( "slow" );
+    \$( ".qpcontent:hidden" ).fadeIn( "slow" );
   } else if (event.key == "j") {
-    \$( ".content:hidden" ).first().fadeIn( "slow" );
+    \$( ".qpcontent:hidden" ).first().fadeIn( "slow" );
   } else if ( event.key == "k" ) {
-    \$( ".content:visible" ).last().fadeOut( "slow" );
+    \$( ".qpcontent:visible" ).last().fadeOut( "slow" );
   } else if (event.key == "J") {
-    \$elt = \$( ".content:hidden" ).first();
+    \$elt = \$( ".qpcontent:hidden" ).first();
     \$elt.fadeIn( "slow" );
-    \$elt[0].scrollIntoView({ behavior: "smooth", block: "start" });
+    \$elt[0].scrollIntoView({ behavior: "smooth", block: "end" });
   } else if (event.key == "n" || event.key == "Enter") {
     doenter();
   } else if (event.key == "K"  || event.key == "Backspace") {
-    \$( ".content:visible" ).last().fadeOut( "slow" );
-    \$("#enddiv")[0].scrollIntoView({ behavior: "smooth", block: "end" });
+    \$elt = \$( ".qpcontent:visible" ).eq(-2);
+    \$( ".qpcontent:visible" ).last().fadeOut( "slow" );
+    if (\$elt.length == 0) {
+      \$("html")[0].scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      \$elt[0].scrollIntoView({ behavior: "smooth", block: "end" });
+    }
   } else if ( event.key == "e") {
-    \$("#enddiv")[0].scrollIntoView({ behavior: "smooth", block: "end" });
+    \$("#endspan")[0].scrollIntoView({ behavior: "smooth", block: "end" });
   }
 });
 </script>
@@ -268,15 +281,15 @@ END
 }
 
 print $out <<END;
-<div class=thebody>
+<div id=thebody>
 END
 
 print $out $outstr;
 
 print $out <<END;
 
-<div id="enddiv">&nbsp;</div>
-<div style="height:6in;"></div>
+<div id="endspacediv"><span id="endspan">&nbsp;</span></div>
+<div id="logo">made in quickpres.pl</div>
 
 </div>
 
