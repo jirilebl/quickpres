@@ -9,11 +9,12 @@ Press j, J, n, or Enter to see what comes next ...
 
 You saw you press j, J, n, or Enter to see what comes next, but there are some differences in scrolling.
 
-* n or Enter will slowly scroll until it finds something to unhide then it unhides it.  Probably this is the way to go through the presentation.
-* j simply unhides the next thing hidden without scrolling.
+* n or Enter will slowly scroll until it finds something to unhide.   If there is something to unhide closer to the middle of the page, it unhides it without scrolling.  This is probably the way to go through the presentation.
+* j simply unhides the next hidden bit without scrolling.  So you can use this in conjunction with the arrow keys or spacebar to scroll.
 * k will hide the last thing
 * Backspace will hide the last thing and scroll to the end.
 * e will scroll to the end (the End key scrolls a bit too far).
+* A (that is, shift-a) will show all the blocks (the entire presentation) at once.  You can hide them all by reloading the page (F5 usually).
 
 ## Syntax
 

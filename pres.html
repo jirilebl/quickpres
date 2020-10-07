@@ -80,7 +80,9 @@ function doenter() {
   }
 }
 $( document.body ).keydown(function( event ) {
-  if (event.key == "j") {
+  if (event.key == "A") {
+    $( ".content:hidden" ).fadeIn( "slow" );
+  } else if (event.key == "j") {
     $( ".content:hidden" ).first().fadeIn( "slow" );
   } else if ( event.key == "k" ) {
     $( ".content:visible" ).last().fadeOut( "slow" );
@@ -109,11 +111,12 @@ Press j, J, n, or Enter to see what comes next ...
 <p>
 You saw you press j, J, n, or Enter to see what comes next, but there are some differences in scrolling.
 <p>
-<ul><li>n or Enter will slowly scroll until it finds something to unhide then it unhides it.  Probably this is the way to go through the presentation.</ul>
-<ul><li>j simply unhides the next thing hidden without scrolling.</ul>
+<ul><li>n or Enter will slowly scroll until it finds something to unhide.   If there is something to unhide closer to the middle of the page, it unhides it without scrolling.  This is probably the way to go through the presentation.</ul>
+<ul><li>j simply unhides the next hidden bit without scrolling.  So you can use this in conjunction with the arrow keys or spacebar to scroll.</ul>
 <ul><li>k will hide the last thing</ul>
 <ul><li>Backspace will hide the last thing and scroll to the end.</ul>
 <ul><li>e will scroll to the end (the End key scrolls a bit too far).</ul>
+<ul><li>A (that is, shift-a) will show all the blocks (the entire presentation) at once.  You can hide them all by reloading the page (F5 usually).</ul>
 <h2>Syntax</h2>
 <p>
 New paragraphs are entered just by leaving an empty line.

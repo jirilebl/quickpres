@@ -244,7 +244,9 @@ function doenter() {
   }
 }
 \$( document.body ).keydown(function( event ) {
-  if (event.key == "j") {
+  if (event.key == "A") {
+    \$( ".content:hidden" ).fadeIn( "slow" );
+  } else if (event.key == "j") {
     \$( ".content:hidden" ).first().fadeIn( "slow" );
   } else if ( event.key == "k" ) {
     \$( ".content:visible" ).last().fadeOut( "slow" );
