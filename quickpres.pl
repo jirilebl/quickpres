@@ -18,7 +18,10 @@ if (not defined $infile) {
 }
 
 if (not defined $outfile) {
-	$outfile = "pres.html";
+	$outfile = $infile;
+	if (not $outfile =~ s/\.[^.]*$/.html/) {
+		$outfile = $infile . ".html";
+	}
 }
 
 print "reading: $infile    writing: $outfile    all at once: $allatonce\n";

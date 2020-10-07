@@ -80,12 +80,17 @@ Though there is a quick way to do centered nice images.
 >>>
 ## Running
 
-Best to just stick <tt>quickpres.pl</tt> into the directory where
-your file is.  Then run (if on Linux) <tt>./quickpres.pl</tt>,
+Easiest is to just stick <tt>quickpres.pl</tt> into the directory where
+your content is.  Then run (if on Linux) <tt>./quickpres.pl</tt>,
 which will compile <tt>pres.prs</tt> into <tt>pres.html</tt>.
+You could also just put it in your path if you want to.
 
 >>>
 You can specify the files by: <tt>./quickpres.pl in.prs out.html</tt>.
+
+>>>
+If you run: <tt>./quickpres.pl file.prs</tt>, the output will be
+in file.html (it will replace the extension with html).
 
 >>>
 Adding -a, that is <tt>./quickpres.pl -a in.prs out.html</tt> or
