@@ -38,13 +38,22 @@ my $title = "Presentation";
 
 my $outstr;
 
+my $lineno = 0;
+
 # No \input file reading here (FIXME?)
 while($line = <$in>)
 {
 	chomp($line);
+
 	$line =~ s/^\s+//;
 	$line =~ s/\s+$//;
-	if ($line =~ s/^###\s*//) {
+
+	$lineno++;
+
+	if ($lineno == 1 and $line =~ m/^!!!DRAFT!!!$/) {
+		print "DRAFT: setting allatonce to 1\n";
+		$allatonce = 1;
+	} elsif ($line =~ s/^###\s*//) {
 		$outstr .= "<h3>$line</h3>\n";
 		$dopar = 1;
 		$skippar = 1;

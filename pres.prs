@@ -186,6 +186,13 @@ ___
 see ... there's empty space.
 
 >>>
+## Draft mode
+
+If the first line of the file is !!!DRAFT!!! then the -a mode will be turned
+on.  Useful for editting so that you don't have to step through the steps,
+useful if you have some sort of a script to run quickpres.pl
+
+>>>
 ## That's it
 
 There's always a chunk of empty space added behind the presentation so
