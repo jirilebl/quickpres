@@ -125,13 +125,26 @@ Press j, J, n, or Enter to see what comes next ...
 <p>
 You saw you press j, J, n, or Enter to see what comes next, but there are some differences in scrolling.
 <p>
-<ul><li>n or Enter will slowly scroll until it finds something to unhide.   If there is something to unhide closer to the middle of the page, it unhides it without scrolling.  This is probably the way to go through the presentation.</ul>
-<ul><li>j simply unhides the next hidden bit without scrolling.  So you can use this in conjunction with the arrow keys or spacebar to scroll.</ul>
-<ul><li>k will hide the last thing without scrolling.</ul>
-<ul><li>J (shift-j) will unhide the next thing and also scroll it into view.  Could be used as the main presentation stepper, but make sure to have blocks that fit on one screen.</ul>
-<ul><li>Backspace or K (shift-k) will hide the last thing and scroll to the end.</ul>
-<ul><li>e will scroll to the end (the End key scrolls a bit too far).</ul>
-<ul><li>A (that is, shift-a) will show all the blocks (the entire presentation) at once.  You can hide them all by reloading the page (F5 usually).</ul>
+<ul><li>n or Enter will slowly scroll until it finds something to unhide.   If there
+  is something to unhide closer to the middle of the page, it unhides it without
+  scrolling.  This is probably the way to go through the presentation.
+</ul>
+<ul><li>j simply unhides the next hidden bit without scrolling.  So you can use this
+  in conjunction with the arrow keys or spacebar to scroll.
+</ul>
+<ul><li>k will hide the last thing without scrolling.
+</ul>
+<ul><li>J (shift-j) will unhide the next thing and also scroll it into view.  Could
+  be used as the main presentation stepper, but make sure to have blocks that fit
+  on one screen.
+</ul>
+<ul><li>Backspace or K (shift-k) will hide the last thing and scroll to the end.
+</ul>
+<ul><li>e will scroll to the end (the End key scrolls a bit too far).
+</ul>
+<ul><li>A (that is, shift-a) will show all the blocks (the entire presentation) at
+  once.  You can hide them all by reloading the page (F5 usually).
+</ul>
 </div>
 <div class="qpcontent" style="display:none;">
 <h2>Syntax</h2>
@@ -142,12 +155,16 @@ So this is a new paragraph.
 But this line is still in the second paragraph, even though we put a
 linebreak.  Just not an empty line.
 <p>
-To simply break lines without any space, put a backslashe
+To simply break lines without any space, put a backslash
 on a separate line:
 <p class="noskip">
 a) this is good for faking short lists
 <p class="noskip">
 b) or whatnot.
+<p>
+Note that a few special characters have some meaning when starting a line.
+But only if the first character on a line.  So you can usually
+get around them having a special meaning by adding a space before.
 </div>
 <div class="qpcontent" style="display:none;">
 <h2>Math</h2>
@@ -166,7 +183,16 @@ Or the backslash square bracket notation
 \sum_{n=1}^\infty \frac{1}{n} .
 \]
 <p>
-(leave an empty line for more space)
+We left an empty line for more space.
+<p>
+You don't want to start new lines in an equation with *, _, !, #, (, backslash, as those
+may have special meaning and this script does not really track if you are in a math
+environment or not.)  This is especially true for *.
+You can put an empty space in front and it will work:
+\[
+1
+ * 3
+\]
 </div>
 <div class="qpcontent" style="display:none;">
 <p>
@@ -235,23 +261,36 @@ The first first-level heading is used as the title for the HTML page.
 <div class="qpcontent" style="display:none;">
 <h2>Bullet lists</h2>
 <p>
-<ul><li>Bullet lists</ul>
+<ul><li>Bullet lists
+</ul>
 </div>
 <div class="qpcontent" style="display:none;">
-<ul><li>are done</ul>
-<ul><li>similar</ul>
-<ul><li>to markdown with stars.</ul>
+<ul><li>are done
+</ul>
+<ul><li>similar
+</ul>
+<ul><li>to markdown with stars.
+</ul>
 <p>
-But the star can't come in the middle of
-a paragraph:
-* this is not a bullet
+<ul><li>this is a bullet (with some leading space)
+</ul>
 <p>
-<ul><li>this is a bullet (with some leading space)</ul>
-<p>
-<ul><li>If you want a long bullet point, it must all come on one line.</ul>
+<ul><li>Text following a bullet on another line is still
+part of the bullet.  If you want a new line that's not
+part of the bullet you have the use the backslash
+</ul>
 <p class="noskip">
-This line will be separate.  Yeah, I could code it to be smarter,
-but ... too lazy.
+This line will be separate.
+</div>
+<div class="qpcontent" style="display:none;">
+<p>
+Beware of bullets in the middle of the paragraph
+<ul><li>that you did not mean, and you just wanted to input
+a star.
+</ul>
+<p class="noskip">
+If you need to add a star you can just add a space
+ * this is not a bullet.
 </div>
 <div class="qpcontent" style="display:none;">
 <h2>Images</h2>
@@ -287,9 +326,7 @@ Quick links can be added on a separate line as (http://link)
 <a href="http://www.google.com">http://www.google.com</a>
 <p>
 Or if you want to have some text then [text](http://link)
-<p class="noskip">
 <a href="http://www.google.com">text</a>
-<p class="noskip">
 Also notice there is less space around this link since we didn't leave an
 empty line around it.
 </div>

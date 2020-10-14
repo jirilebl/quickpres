@@ -40,12 +40,28 @@ my $outstr;
 
 my $lineno = 0;
 
+my $inbullet = 0;
+
+sub closebullet {
+	if ($inbullet == 1) {
+		$outstr .= "</ul>\n";
+	}
+	$inbullet = 0;
+}
+
+sub newpar {
+	if ($dopar == 1 and $skippar == 1) {
+		$outstr .= "<p>\n";
+	} else {
+		$outstr .= "<p class=\"noskip\">\n";
+	}
+}
+
 # No \input file reading here (FIXME?)
 while($line = <$in>)
 {
 	chomp($line);
 
-	$line =~ s/^\s+//;
 	$line =~ s/\s+$//;
 
 	$lineno++;
@@ -54,14 +70,17 @@ while($line = <$in>)
 		print "DRAFT: setting allatonce to 1\n";
 		$allatonce = 1;
 	} elsif ($line =~ s/^###\s*//) {
+		closebullet();
 		$outstr .= "<h3>$line</h3>\n";
 		$dopar = 1;
 		$skippar = 1;
 	} elsif ($line =~ s/^##\s*//) {
+		closebullet();
 		$outstr .= "<h2>$line</h2>\n";
 		$dopar = 1;
 		$skippar = 1;
 	} elsif ($line =~ s/^#\s*//) {
+		closebullet();
 		if ($gottitle == 0) {
 			$gottitle = 1;
 			$title = $line;
@@ -69,100 +88,85 @@ while($line = <$in>)
 		$outstr .= "<h1>$line</h1>\n";
 		$dopar = 1;
 		$skippar = 1;
-	} elsif ($dopar == 1 and $line =~ s/^[*]\s*//) {
+	} elsif ($line =~ s/^[*]\s*//) {
+		closebullet();
 		if ($skippar == 1) {
 			$outstr .= "<p>\n";
 		}
-		$outstr .= "<ul><li>$line</ul>\n";
-		$dopar = 1;
+		$outstr .= "<ul><li>$line\n";
+		$inbullet = 1;
+		$dopar = 0;
 		$skippar = 0;
 	} elsif ($line =~ m/^[(](http.*)[)]$/) {
-		if ($dopar == 1 and $skippar == 1) {
-			$outstr .= "<p>\n";
-		} else {
-			$outstr .= "<p class=\"noskip\">\n";
+		if ($dopar == 1) {
+			newpar();
 		}
 		$outstr .= "<a href=\"$1\">$1</a>\n";
-		$dopar = 1;
+		$dopar = 0;
 		$skippar = 0;
 	} elsif ($line =~ m/^\[([^]]*)\][(](http.*)[)]$/) {
-		if ($dopar == 1 and $skippar == 1) {
-			$outstr .= "<p>\n";
-		} else {
-			$outstr .= "<p class=\"noskip\">\n";
+		if ($dopar == 1) {
+			newpar();
 		}
 		$outstr .= "<a href=\"$2\">$1</a>\n";
-		$dopar = 1;
+		$dopar = 0;
 		$skippar = 0;
 	} elsif ($line =~ m/^!!![(](.*)[)]$/) {
-		if ($dopar == 1 and $skippar == 1) {
-			$outstr .= "<p>\n";
-		} else {
-			$outstr .= "<p class=\"noskip\">\n";
-		}
+		closebullet();
+		newpar();
 		$outstr .= "<img class=\"chhimage\" src=\"$1\">\n";
 		$dopar = 1;
 		$skippar = 0;
 	} elsif ($line =~ m/^!!!\[([^]]*)\][(](.*)[)]$/) {
-		if ($dopar == 1 and $skippar == 1) {
-			$outstr .= "<p>\n";
-		} else {
-			$outstr .= "<p class=\"noskip\">\n";
-		}
+		closebullet();
+		newpar();
 		$outstr .= "<img class=\"chhimage\" src=\"$2\" alt=\"$1\">\n";
 		$dopar = 1;
 		$skippar = 0;
 	} elsif ($line =~ m/^!![(](.*)[)]$/) {
-		if ($dopar == 1 and $skippar == 1) {
-			$outstr .= "<p>\n";
-		} else {
-			$outstr .= "<p class=\"noskip\">\n";
-		}
+		closebullet();
+		newpar();
 		$outstr .= "<img class=\"chimage\" src=\"$1\">\n";
 		$dopar = 1;
 		$skippar = 0;
 	} elsif ($line =~ m/^!!\[([^]]*)\][(](.*)[)]$/) {
-		if ($dopar == 1 and $skippar == 1) {
-			$outstr .= "<p>\n";
-		} else {
-			$outstr .= "<p class=\"noskip\">\n";
-		}
+		closebullet();
+		newpar();
 		$outstr .= "<img class=\"chimage\" src=\"$2\" alt=\"$1\">\n";
 		$dopar = 1;
 		$skippar = 0;
 	} elsif ($line =~ m/^![(](.*)[)]$/) {
-		if ($dopar == 1 and $skippar == 1) {
-			$outstr .= "<p>\n";
-		} else {
-			$outstr .= "<p class=\"noskip\">\n";
-		}
+		closebullet();
+		newpar();
 		$outstr .= "<img class=\"cimage\" src=\"$1\">\n";
 		$dopar = 1;
 		$skippar = 0;
 	} elsif ($line =~ m/^!\[([^]]*)\][(](.*)[)]$/) {
-		if ($dopar == 1 and $skippar == 1) {
-			$outstr .= "<p>\n";
-		} else {
-			$outstr .= "<p class=\"noskip\">\n";
-		}
+		closebullet();
+		newpar();
 		$outstr .= "<img class=\"cimage\" src=\"$2\" alt=\"$1\">\n";
 		$dopar = 1;
 		$skippar = 0;
 	} elsif ($line =~ m/^\\$/) {
+		closebullet();
 		$dopar = 1;
 		$skippar = 0;
 	} elsif ($line =~ m/^$/) {
+		closebullet();
 		$dopar = 1;
 		$skippar = 1;
 	} elsif ($line =~ m/^---$/) {
+		closebullet();
 		$outstr .= "<hr>\n";
 		$dopar = 1;
 		$skippar = 1;
 	} elsif ($line =~ m/^___$/) {
+		closebullet();
 		$outstr .= "<div style=\"height:2in;\"></div>\n";
 		$dopar = 1;
 		$skippar = 0;
 	} elsif ($line =~ m/^>>>$/) {
+		closebullet();
 		if ($indiv == 1) { 
 			$outstr .= "</div>\n";
 		}
@@ -175,28 +179,22 @@ while($line = <$in>)
 		$dopar = 1;
 	} elsif ($line =~ m/^_([^_][^_]*)_([^_]*)$/) {
 		if ($dopar == 1) {
-			if ($skippar == 1) {
-				$outstr .= "<p>\n";
-			} else {
-				$outstr .= "<p class=\"noskip\">\n";
-			}
+			newpar();
 		}
 		$dopar = 0;
 		$skippar = 0;
 		$outstr .= "<b>$1</b>$2\n";
 	} else {
 		if ($dopar == 1) {
-			if ($skippar == 1) {
-				$outstr .= "<p>\n";
-			} else {
-				$outstr .= "<p class=\"noskip\">\n";
-			}
+			newpar();
 		}
 		$dopar = 0;
 		$skippar = 0;
 		$outstr .= "$line\n";
 	}
 }
+
+closebullet();
 
 if ($indiv == 1) { 
 	$outstr .= "</div>\n";
