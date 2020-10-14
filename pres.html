@@ -45,6 +45,8 @@ h1 {text-align:left;}
 h2 {text-align:left;}
 h3 {text-align:left;}
 .cimage { display:block; max-width: 90%; margin-left: auto; margin-right: auto; }
+.chimage { display:block; max-width: 50%; margin-left: auto; margin-right: auto; }
+.chhimage { display:block; max-width: 25%; margin-left: auto; margin-right: auto; }
 div#thebody {margin-top:20px; margin-left: 5%; margin-right:5%; max-width:1100px;}
 h3 {margin-left:-2%;}
 h2 {margin-left:-2%;}
@@ -264,6 +266,18 @@ alt text with ![alt text](img.png)
 And now with alt text:
 <p class="noskip">
 <img class="cimage" src="sampleimg.png" alt="Alt text">
+</div>
+<div class="qpcontent" style="display:none;">
+<p>
+The above takes at most 90% of the textwidth (but does not scale up if
+the image is smaller).
+This is usually fine, but sometimes you want to restrict the maximum size to a
+smaller width.  Using !!(img.png) will restrict to 50% of the text
+width and !!!(img.png) will restrict to 25% of the text width.
+<p>
+<img class="chimage" src="sampleimg.png">
+<p>
+<img class="chhimage" src="sampleimg.png">
 </div>
 <div class="qpcontent" style="display:none;">
 <h2>Links</h2>

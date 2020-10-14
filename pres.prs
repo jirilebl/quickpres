@@ -142,6 +142,17 @@ And now with alt text:
 ![Alt text](sampleimg.png)
 
 >>>
+The above takes at most 90% of the textwidth (but does not scale up if
+the image is smaller).
+This is usually fine, but sometimes you want to restrict the maximum size to a
+smaller width.  Using !!(img.png) will restrict to 50% of the text
+width and !!!(img.png) will restrict to 25% of the text width.
+
+!!(sampleimg.png)
+
+!!!(sampleimg.png)
+
+>>>
 ## Links
 
 Quick links can be added on a separate line as (http://link)

@@ -94,7 +94,43 @@ while($line = <$in>)
 		$outstr .= "<a href=\"$2\">$1</a>\n";
 		$dopar = 1;
 		$skippar = 0;
-	} elsif ($line =~ m/^[!][(](.*)[)]$/) {
+	} elsif ($line =~ m/^!!![(](.*)[)]$/) {
+		if ($dopar == 1 and $skippar == 1) {
+			$outstr .= "<p>\n";
+		} else {
+			$outstr .= "<p class=\"noskip\">\n";
+		}
+		$outstr .= "<img class=\"chhimage\" src=\"$1\">\n";
+		$dopar = 1;
+		$skippar = 0;
+	} elsif ($line =~ m/^!!!\[([^]]*)\][(](.*)[)]$/) {
+		if ($dopar == 1 and $skippar == 1) {
+			$outstr .= "<p>\n";
+		} else {
+			$outstr .= "<p class=\"noskip\">\n";
+		}
+		$outstr .= "<img class=\"chhimage\" src=\"$2\" alt=\"$1\">\n";
+		$dopar = 1;
+		$skippar = 0;
+	} elsif ($line =~ m/^!![(](.*)[)]$/) {
+		if ($dopar == 1 and $skippar == 1) {
+			$outstr .= "<p>\n";
+		} else {
+			$outstr .= "<p class=\"noskip\">\n";
+		}
+		$outstr .= "<img class=\"chimage\" src=\"$1\">\n";
+		$dopar = 1;
+		$skippar = 0;
+	} elsif ($line =~ m/^!!\[([^]]*)\][(](.*)[)]$/) {
+		if ($dopar == 1 and $skippar == 1) {
+			$outstr .= "<p>\n";
+		} else {
+			$outstr .= "<p class=\"noskip\">\n";
+		}
+		$outstr .= "<img class=\"chimage\" src=\"$2\" alt=\"$1\">\n";
+		$dopar = 1;
+		$skippar = 0;
+	} elsif ($line =~ m/^![(](.*)[)]$/) {
 		if ($dopar == 1 and $skippar == 1) {
 			$outstr .= "<p>\n";
 		} else {
@@ -103,7 +139,7 @@ while($line = <$in>)
 		$outstr .= "<img class=\"cimage\" src=\"$1\">\n";
 		$dopar = 1;
 		$skippar = 0;
-	} elsif ($line =~ m/^[!]\[([^]]*)\][(](.*)[)]$/) {
+	} elsif ($line =~ m/^!\[([^]]*)\][(](.*)[)]$/) {
 		if ($dopar == 1 and $skippar == 1) {
 			$outstr .= "<p>\n";
 		} else {
@@ -214,6 +250,8 @@ h1 {text-align:left;}
 h2 {text-align:left;}
 h3 {text-align:left;}
 .cimage { display:block; max-width: 90%; margin-left: auto; margin-right: auto; }
+.chimage { display:block; max-width: 50%; margin-left: auto; margin-right: auto; }
+.chhimage { display:block; max-width: 25%; margin-left: auto; margin-right: auto; }
 div#thebody {margin-top:20px; margin-left: 5%; margin-right:5%; max-width:1100px;}
 h3 {margin-left:-2%;}
 h2 {margin-left:-2%;}
