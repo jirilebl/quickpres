@@ -221,10 +221,10 @@ MathJax = {
 </script> 
 <style>
 html { scroll-behavior: smooth; }
-span.smaller {font-size:80%;}
-span.tiny {font-size:60%;}
-span.larger {font-size:120%;}
-span.largerbold {font-size:120%; font-weight:bold;}
+span.small {font-size:67%;}
+span.tiny {font-size:50%;}
+span.large {font-size:150%;}
+span.huge {font-size:200%; }
 span.tt {font-family: Courier, "Courier New", monospace;}
 h1 {font-size:180%; font-weight:bold;}
 h2 {font-size:120%; font-weight:bold;}
@@ -282,11 +282,11 @@ function doenter() {
 
   if(rect.top <= 0) {
     \$elt = \$( ".qpcontent:hidden" ).first();
-    \$elt.fadeIn( "slow" );
+    \$elt.fadeIn( 400 );
     \$elt[0].scrollIntoView({ behavior: "smooth", block: "start" });
   } else if(rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8) {
     \$elt = \$( ".qpcontent:hidden" ).first();
-    \$elt.fadeIn( "slow" );
+    \$elt.fadeIn( 400 );
   } else {
     window.scrollBy({ 
       top: 120, // could be negative value
@@ -297,25 +297,46 @@ function doenter() {
 }
 \$( document.body ).keydown(function( event ) {
   if (event.key == "A") {
-    \$( ".qpcontent:hidden" ).fadeIn( "slow" );
-  } else if (event.key == "j") {
-    \$( ".qpcontent:hidden" ).first().fadeIn( "slow" );
-  } else if ( event.key == "k" ) {
-    \$( ".qpcontent:visible" ).last().fadeOut( "slow" );
+    \$( ".qpcontent:hidden" ).fadeIn( 400 );
   } else if (event.key == "J") {
+    \$( ".qpcontent:hidden" ).first().fadeIn( 400 );
+  } else if ( event.key == "K" ) {
+    \$( ".qpcontent:visible" ).last().fadeOut( 200 );
+  } else if (event.key == "j") {
     \$elt = \$( ".qpcontent:hidden" ).first();
-    \$elt.fadeIn( "slow" );
-    \$elt[0].scrollIntoView({ behavior: "smooth", block: "end" });
+    \$elt.fadeIn( 400 );
+    if (\$elt[0].getBoundingClientRect().height > window.innerHeight*0.9) {
+      window.scrollTo({
+	   top: \$elt[0].getBoundingClientRect().top+window.scrollY,
+           behavior: "smooth"
+      });
+    } else {
+      window.scrollTo({
+	   top: \$elt[0].getBoundingClientRect().bottom-window.innerHeight*0.9+window.scrollY,
+           behavior: "smooth"
+      });
+    }
   } else if (event.key == "n" || event.key == "Enter") {
     doenter();
-  } else if (event.key == "K"  || event.key == "Backspace") {
-    \$elt = \$( ".qpcontent:visible" ).eq(-2);
-    \$( ".qpcontent:visible" ).last().fadeOut( "slow" );
-    if (\$elt.length == 0) {
-      \$("html")[0].scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-      \$elt[0].scrollIntoView({ behavior: "smooth", block: "end" });
-    }
+  } else if (event.key == "k" || event.key == "Backspace") {
+    \$( ".qpcontent:visible" ).last().fadeOut( 200 , function () {
+      \$elt = \$( ".qpcontent:visible" ).last();
+      if (\$elt.length == 0) {
+        \$("html")[0].scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        if (\$elt[0].getBoundingClientRect().height > window.innerHeight*0.9) {
+          window.scrollTo({
+	       top: \$elt[0].getBoundingClientRect().top+window.scrollY,
+               behavior: "smooth"
+          });
+        } else {
+          window.scrollTo({
+	       top: \$elt[0].getBoundingClientRect().bottom-window.innerHeight*0.9+window.scrollY,
+               behavior: "smooth"
+          });
+	}
+      }
+    } );
   } else if ( event.key == "e") {
     \$("#endspan")[0].scrollIntoView({ behavior: "smooth", block: "end" });
   }

@@ -11,14 +11,18 @@ You saw you press j, J, n, or Enter to see what comes next, but there are some d
 
 * n or Enter will slowly scroll until it finds something to unhide.   If there
   is something to unhide closer to the middle of the page, it unhides it without
-  scrolling.  This is probably the way to go through the presentation.
-* j simply unhides the next hidden bit without scrolling.  So you can use this
+  scrolling.  This is one way to go through the presentation, especially with long blocks.
+* j will unhide the next thing and also scroll it into view.  This is an alternate
+  way to go through the presentation, especially with short blocks.  Make
+  sure to have blocks that fit on one screen.  The bottom of the new block will
+  be scrolled to about 90% of the view port, unless the block is smaller than
+  that, in which case it will be scrolled to the top and you'll have to scroll
+  through the block manually
+* Backspace or k will hide the last thing and scroll to last block, in the same way
+  that j scrolls.
+* J (shift-j) simply unhides the next hidden bit without scrolling.  So you can use this
   in conjunction with the arrow keys or spacebar to scroll.
-* k will hide the last thing without scrolling.
-* J (shift-j) will unhide the next thing and also scroll it into view.  Could
-  be used as the main presentation stepper, but make sure to have blocks that fit
-  on one screen.
-* Backspace or K (shift-k) will hide the last thing and scroll to the end.
+* K (shift-k) will hide the last thing without scrolling.
 * e will scroll to the end (the End key scrolls a bit too far).
 * A (that is, shift-a) will show all the blocks (the entire presentation) at
   once.  You can hide them all by reloading the page (F5 usually).
