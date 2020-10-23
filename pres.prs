@@ -26,7 +26,7 @@ You saw you press j, J, n, or Enter to see what comes next, but there are some d
 * K (shift-k) will hide the last thing without scrolling.
 * e will scroll to the end (the End key scrolls a bit too far).
 * A (shift-a) will show all the blocks (the entire presentation) at once.
-  You can hide them all by reloading the page (F5 usually).
+* B (shift-b) will hide all the blocks (You can also hide them by reloading the page).
 
 >>>
 ## Syntax

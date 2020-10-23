@@ -18,3 +18,15 @@ I am teaching with this currently (Fall 2020) and so capability and sometimes sy
 from day to day, though I don't really expect it to change much, I do want it to be able to read older
 presentations I've done.  If you want to use this you might want to just want to fix at a specific version
 unless you plan on tracking the changes to syntax.
+
+## Some more hacky scripts
+
+The `runinfirefox.sh` is a very simple script that when passed the name without
+extension say `./runinfirefox.sh pres` will start a python http server and runs
+firefox on pres.html.  This will work only if you have Linux.
+
+The `buildprswatch.sh` is an even more Linux/GNOME specific script for writing
+presentations.  You need zsh, epiphany (gnome web), and gvim.  You start it as
+`./buildprswatch.sh pres` and it starts an editor on pres.prs, starts epiphany
+on pres.html.  Whenever you save, the script will rerun quick press (with -a),
+and epihpany automatically reloads.

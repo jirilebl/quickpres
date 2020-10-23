@@ -298,6 +298,10 @@ function doenter() {
 \$( document.body ).keydown(function( event ) {
   if (event.key == "A") {
     \$( ".qpcontent:hidden" ).fadeIn( 400 );
+  } else if (event.key == "B") {
+    \$( ".qpcontent:visible" ).fadeOut( 200 , function () {
+      \$("html")[0].scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   } else if (event.key == "J") {
     \$( ".qpcontent:hidden" ).first().fadeIn( 400 );
   } else if ( event.key == "K" ) {

@@ -91,6 +91,10 @@ function doenter() {
 $( document.body ).keydown(function( event ) {
   if (event.key == "A") {
     $( ".qpcontent:hidden" ).fadeIn( 400 );
+  } else if (event.key == "B") {
+    $( ".qpcontent:visible" ).fadeOut( 200 , function () {
+      $("html")[0].scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   } else if (event.key == "J") {
     $( ".qpcontent:hidden" ).first().fadeIn( 400 );
   } else if ( event.key == "K" ) {
@@ -169,7 +173,8 @@ You saw you press j, J, n, or Enter to see what comes next, but there are some d
 <ul><li>e will scroll to the end (the End key scrolls a bit too far).
 </ul>
 <ul><li>A (shift-a) will show all the blocks (the entire presentation) at once.
-  You can hide them all by reloading the page (F5 usually).
+</ul>
+<ul><li>B (shift-b) will hide all the blocks (You can also hide them by reloading the page).
 </ul>
 </div>
 <div class="qpcontent" style="display:none;">
