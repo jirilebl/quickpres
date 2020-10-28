@@ -40,7 +40,7 @@ a:visited {color:#500805; background-color:transparent; }
 }
 a:hover {color:#ff0000; background-color:transparent; }
 a:active {color:#ff0000; background-color:transparent; }
-div.centered {text-align:center;}
+.centered {text-align:center;}
 h1 {text-align:left;}
 h2 {text-align:left;}
 h3 {text-align:left;}
@@ -434,21 +434,28 @@ first character on a line:
 <div class="qpcontent" style="display:none;">
 <h2>Empty space</h2>
 <p>
-You can add a bit of empty space (for perhaps drawing or something) with ___ (three undersccores) on an separate line
+You can add a bit of empty space (for perhaps drawing or something) with ___ (three underscores) on an separate line
 <div style="height:2in;"></div>
 <p>
 see ... there's empty space.
 </div>
 <div class="qpcontent" style="display:none;">
+<h2>Centering paragraphs</h2>
+<p>
+Putting a line inside inverted brackets will center it:
+<p class="centered">
+this is centered
+</div>
+<div class="qpcontent" style="display:none;">
 <h2>Draft mode</h2>
 <p>
-If the first line of the file is !!!DRAFT!!! then the -a mode will be turned
+If the first line of the file is "!!!DRAFT!!!", then the -a mode will be turned
 on.  Useful for editing so that you don't have to step through the steps,
 useful if you have some sort of a script to run quickpres.pl.
 </div>
 <div class="qpcontent" style="display:none;">
 <p>
-As I was lazy to keep typing that, it can be replaced by !-a instead.
+As I was lazy to keep typing that, it can be replaced by "!-a" instead.
 Eventually that may be a more general mechanism for passing any other command
 line options, and draft mode may also diverge to have other features ...
 </div>

@@ -257,22 +257,30 @@ first character on a line:
 >>>
 ## Empty space
 
-You can add a bit of empty space (for perhaps drawing or something) with ___ (three undersccores) on an separate line
+You can add a bit of empty space (for perhaps drawing or something) with ___ (three underscores) on an separate line
 
 ___
 
 see ... there's empty space.
 
 >>>
+
+## Centering paragraphs
+
+Putting a line inside inverted brackets will center it:
+
+>this is centered<
+
+>>>
 ## Draft mode
 
-If the first line of the file is !!!DRAFT!!! then the -a mode will be turned
+If the first line of the file is "!!!DRAFT!!!", then the -a mode will be turned
 on.  Useful for editing so that you don't have to step through the steps,
 useful if you have some sort of a script to run quickpres.pl.
 
 >>>
 
-As I was lazy to keep typing that, it can be replaced by !-a instead.
+As I was lazy to keep typing that, it can be replaced by "!-a" instead.
 Eventually that may be a more general mechanism for passing any other command
 line options, and draft mode may also diverge to have other features ...
 

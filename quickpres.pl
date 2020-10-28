@@ -150,6 +150,16 @@ while($line = <$in>)
 		$outstr .= "<img class=\"cimage\" src=\"$2\" alt=\"$1\">\n";
 		$dopar = 1;
 		$skippar = 0;
+	} elsif ($line =~ m/^[>](.*)[<]\s*$/) {
+		closebullet();
+		if ($dopar == 1 and $skippar == 1) {
+			$outstr .= "<p class=\"centered\">\n";
+		} else {
+			$outstr .= "<p class=\"noskip centered\">\n";
+		}
+		$outstr .= "$1\n";
+		$dopar = 1;
+		$skippar = 0;
 	} elsif ($line =~ m/^\\$/) {
 		closebullet();
 		$dopar = 1;
@@ -253,7 +263,7 @@ a:visited {color:#500805; background-color:transparent; }
 }
 a:hover {color:#ff0000; background-color:transparent; }
 a:active {color:#ff0000; background-color:transparent; }
-div.centered {text-align:center;}
+.centered {text-align:center;}
 h1 {text-align:left;}
 h2 {text-align:left;}
 h3 {text-align:left;}
