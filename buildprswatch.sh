@@ -15,7 +15,7 @@ while [ ! -e "$1.prs" ]; do
   zselect -t 40
 done
 
-./quickpres.pl -a "$1".prs "$1".html
+./quickpres.pl -A "$1".prs "$1".html
 #~/quickpres.pl "$1".prs "$1".html
 touch "$1.html"
 
@@ -24,7 +24,7 @@ epiphany -p "file://$PWD/$1.html" &
 
 while :; do
   if [ "$1.html" -ot "$1.prs" ]; then
-    ./quickpres.pl -a "$1".prs "$1".html
+    ./quickpres.pl -A "$1".prs "$1".html
     #./quickpres.pl "$1".prs "$1".html
     touch "$1.html"
   fi
