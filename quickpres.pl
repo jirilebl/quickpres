@@ -69,6 +69,9 @@ while($line = <$in>)
 	if ($lineno == 1 and $line =~ m/^!!!DRAFT!!!$/) {
 		print "DRAFT: setting allatonce to 1\n";
 		$allatonce = 1;
+	} elsif ($lineno == 1 and $line =~ m/^!-a\s*$/) {
+		print "found options line.  Found -a, setting allatonce to 1\n";
+		$allatonce = 1;
 	} elsif ($line =~ s/^###\s*//) {
 		closebullet();
 		$outstr .= "<h3>$line</h3>\n";

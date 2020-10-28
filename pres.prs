@@ -2,7 +2,7 @@
 
 HTML scrolling presentation for math classes, with syntax mildly inspired by Markdown
 
-Press j, J, n, or Enter to see what comes next ...
+Press j, J, n, or Enter to see what comes next (j is best here) ...
 
 >>>
 ## How to use
@@ -13,18 +13,23 @@ You saw you press j, J, n, or Enter to see what comes next, but there are some d
   there is something to unhide closer to the middle of the page, it unhides it
   without scrolling.  This is one way to go through the presentation,
   especially with long blocks.
+>>>
 * j will unhide the next thing and also scroll it into view.  This is an
   alternate way to go through the presentation, especially with short blocks.
   Make sure to have blocks that fit on one screen.  The bottom of the new block
   will be scrolled to about 90% of the view port, unless the block is smaller
   than that, in which case it will be scrolled to the top and you'll have to
   scroll through the block manually
+>>>
 * Backspace or k will hide the last thing and scroll to last block, in the
   same way that j scrolls.
+>>>
 * J (shift-j) simply unhides the next hidden bit without scrolling.  So you
   can use this in conjunction with the arrow keys or spacebar to scroll.
 * K (shift-k) will hide the last thing without scrolling.
+>>>
 * e will scroll to the end (the End key scrolls a bit too far).
+>>>
 * A (shift-a) will show all the blocks (the entire presentation) at once.
 * B (shift-b) will hide all the blocks (You can also hide them by reloading the page).
 
@@ -37,13 +42,15 @@ So this is a new paragraph.
 But this line is still in the second paragraph, even though we put a
 linebreak.  Just not an empty line.
 
-This is a new paragraph so it put some empty space.
+>>>
+This is a new paragraph so there is some empty space.
 To simply break lines without any added space, put a backslash
 on a separate line:
 \
 a) this is good for faking short lists
 \
 b) or whatnot.
+>>>
 
 Note that a few special characters have some meaning when starting a line.
 But only if the first character on a line.  So you can usually
@@ -64,8 +71,10 @@ Or the backslash square bracket notation
 \sum_{n=1}^\infty \frac{1}{n} .
 \]
 
+>>>
 We left an empty line for more space.
 
+>>>
 You don't want to start new lines in an equation with *, _, !, #, (, backslash, as those
 may have special meaning and this script does not really track if you are in a math
 environment or not.)  This is especially true for *.
@@ -231,8 +240,14 @@ see ... there's empty space.
 ## Draft mode
 
 If the first line of the file is !!!DRAFT!!! then the -a mode will be turned
-on.  Useful for editting so that you don't have to step through the steps,
-useful if you have some sort of a script to run quickpres.pl
+on.  Useful for editing so that you don't have to step through the steps,
+useful if you have some sort of a script to run quickpres.pl.
+
+>>>
+
+As I was lazy to keep typing that, it can be replaced by !-a instead.
+Eventually that may be a more general mechanism for passing any other command
+line options, and draft mode may also diverge to have other features ...
 
 >>>
 ## That's it
