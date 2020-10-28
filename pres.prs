@@ -129,9 +129,16 @@ If you run: <tt>./quickpres.pl file.prs</tt>, the output will be
 in file.html (it will replace the extension with html).
 
 >>>
+Adding -A, that is <tt>./quickpres.pl -A in.prs out.html</tt> or
+<tt>./quickpres.pl -A</tt> will just show all the
+blocks all at once initially.  It is like typing A right after loading
+the file.  All the keyboard shortcuts still work so you can type B to hide them.
+
+>>>
 Adding -a, that is <tt>./quickpres.pl -a in.prs out.html</tt> or
 <tt>./quickpres.pl -a</tt> will just show all the
-blocks all at once.
+blocks all at once and also not include the javascript to show/hide them
+or any of the keyboard navigation.
 
 >>>
 ## Headers
@@ -274,15 +281,16 @@ Putting a line inside inverted brackets will center it:
 >>>
 ## Draft mode
 
-If the first line of the file is "!!!DRAFT!!!", then the -a mode will be turned
-on.  Useful for editing so that you don't have to step through the steps,
-useful if you have some sort of a script to run quickpres.pl.
+If the first line of the file is "!!!DRAFT!!!" (without the quotes of course),
+then the -a mode will be turned on.  Useful for editing so that you don't
+have to step through the steps, useful if you have some sort of a script to
+run quickpres.pl.
 
 >>>
 
 As I was lazy to keep typing that, it can be replaced by "!-a" instead.
-Eventually that may be a more general mechanism for passing any other command
-line options, and draft mode may also diverge to have other features ...
+You can also use "!-A" to instead use the -A option, that is show the blocks
+but still allow hiding all of them with the keyboard shortcuts.
 
 >>>
 ## That's it

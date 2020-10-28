@@ -2,10 +2,15 @@
 
 my ($opt, $infile, $outfile) = @ARGV;
 my $allatonce = 0;
+my $iniallatonce = 0;
 
 if (defined $opt) {
 	if ($opt =~ m/^-a/) {
 		$allatonce = 1;
+		$iniallatonce = 0;
+	} elsif ($opt =~ m/^-A/) {
+		$iniallatonce = 1;
+		$allatonce = 0;
 	} elsif ($opt =~ m/^-/) {
 		die "unknown option";
 	} else {
@@ -24,7 +29,7 @@ if (not defined $outfile) {
 	}
 }
 
-print "reading: $infile    writing: $outfile    all at once: $allatonce\n";
+print "reading: $infile    writing: $outfile    all at once (only initial): $allatonce ($iniallatonce)\n";
 
 open(my $in,'<', $infile) or die $!; 
 open(my $out, '>', $outfile) or die $!; 
@@ -69,9 +74,15 @@ while($line = <$in>)
 	if ($lineno == 1 and $line =~ m/^!!!DRAFT!!!$/) {
 		print "DRAFT: setting allatonce to 1\n";
 		$allatonce = 1;
+		$iniallatonce = 0;
 	} elsif ($lineno == 1 and $line =~ m/^!-a\s*$/) {
 		print "found options line.  Found -a, setting allatonce to 1\n";
 		$allatonce = 1;
+		$iniallatonce = 0;
+	} elsif ($lineno == 1 and $line =~ m/^!-A\s*$/) {
+		print "found options line.  Found -A, setting iniallatonce to 1\n";
+		$iniallatonce = 1;
+		$allatonce = 0;
 	} elsif ($line =~ s/^###\s*//) {
 		closebullet();
 		$outstr .= "<h3>$line</h3>\n";
@@ -183,7 +194,7 @@ while($line = <$in>)
 		if ($indiv == 1) { 
 			$outstr .= "</div>\n";
 		}
-		if ($allatonce == 1) {
+		if ($allatonce == 1 or $iniallatonce == 1) {
 			$outstr .= "<div class=\"qpcontent\">\n";
 		} else {
 			$outstr .= "<div class=\"qpcontent\" style=\"display:none;\">\n";
