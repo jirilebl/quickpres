@@ -153,7 +153,7 @@ The first first-level heading is used as the title for the HTML page.
 * similar
 * to markdown with stars.
 
-* this is a bullet (with some leading space)
+* this is a bullet (with some leading vertical space)
 
 * Text following a bullet on another line is still
 part of the bullet.  If you want a new line that's not
@@ -163,12 +163,20 @@ This line will be separate.
 
 >>>
 
+*The star must be followed by a space otherwise it is not a bullet
+
+>>>
+
 Beware of bullets in the middle of the paragraph
 * that you did not mean, and you just wanted to input
 a star.
 \
 If you need to add a star you can just add a space
  * this is not a bullet.
+
+>>>
+
+Stars are also used for italics, see below.
 
 >>>
 ## Images
@@ -214,11 +222,10 @@ This is between rules.
 ---
 
 >>>
-## Bold
+## Bold and italic
 
-A slightly less general than markdown, you can use underscores to bold
-a piece of text, but it must appear on a separate line _this_ doesn't
-do it, but
+You can use underscores to bold a piece of text, but it must appear on a
+separate line (unlike markdown) _this_ doesn't do it, but
 _this_
 does.  It can be, as you can see in the middle of a paragraph, but it has
 to be a separate line.
@@ -226,6 +233,26 @@ Other text can come after the second underscore like
 _this_ as long as there are no more underscores.  This is
 useful for putting punctuation after bold, or whenever you don't want
 to leave a space right after bold.
+
+>>>
+
+Similarly you can use stars
+*to make something italic* although you cannot combine italics and bold
+like this (though you can just use html then)
+
+>>>
+
+Make sure to not add a space after the star:
+* this* is not in italics, it is a bullet.
+
+>>>
+
+And again, to use a leading * in mathematics say, just don't make it the
+first character on a line:
+\[
+3
+ *5* \text{ok even if there are two stars on a line}.
+\]
 
 >>>
 ## Empty space

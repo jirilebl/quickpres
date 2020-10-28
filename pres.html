@@ -322,7 +322,7 @@ The first first-level heading is used as the title for the HTML page.
 <ul><li>to markdown with stars.
 </ul>
 <p>
-<ul><li>this is a bullet (with some leading space)
+<ul><li>this is a bullet (with some leading vertical space)
 </ul>
 <p>
 <ul><li>Text following a bullet on another line is still
@@ -334,6 +334,10 @@ This line will be separate.
 </div>
 <div class="qpcontent" style="display:none;">
 <p>
+*The star must be followed by a space otherwise it is not a bullet
+</div>
+<div class="qpcontent" style="display:none;">
+<p>
 Beware of bullets in the middle of the paragraph
 <ul><li>that you did not mean, and you just wanted to input
 a star.
@@ -341,6 +345,10 @@ a star.
 <p class="noskip">
 If you need to add a star you can just add a space
  * this is not a bullet.
+</div>
+<div class="qpcontent" style="display:none;">
+<p>
+Stars are also used for italics, see below.
 </div>
 <div class="qpcontent" style="display:none;">
 <h2>Images</h2>
@@ -390,18 +398,38 @@ This is between rules.
 <hr>
 </div>
 <div class="qpcontent" style="display:none;">
-<h2>Bold</h2>
+<h2>Bold and italic</h2>
 <p>
-A slightly less general than markdown, you can use underscores to bold
-a piece of text, but it must appear on a separate line _this_ doesn't
-do it, but
-<b>this</b>
+You can use underscores to bold a piece of text, but it must appear on a
+separate line (unlike markdown) _this_ doesn't do it, but
+<strong>this</strong>
 does.  It can be, as you can see in the middle of a paragraph, but it has
 to be a separate line.
 Other text can come after the second underscore like
-<b>this</b> as long as there are no more underscores.  This is
+<strong>this</strong> as long as there are no more underscores.  This is
 useful for putting punctuation after bold, or whenever you don't want
 to leave a space right after bold.
+</div>
+<div class="qpcontent" style="display:none;">
+<p>
+Similarly you can use stars
+<em>to make something italic</em> although you cannot combine italics and bold
+like this (though you can just use html then)
+</div>
+<div class="qpcontent" style="display:none;">
+<p>
+Make sure to not add a space after the star:
+<ul><li>this* is not in italics, it is a bullet.
+</ul>
+</div>
+<div class="qpcontent" style="display:none;">
+<p>
+And again, to use a leading * in mathematics say, just don't make it the
+first character on a line:
+\[
+3
+ *5* \text{ok even if there are two stars on a line}.
+\]
 </div>
 <div class="qpcontent" style="display:none;">
 <h2>Empty space</h2>

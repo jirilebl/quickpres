@@ -91,7 +91,7 @@ while($line = <$in>)
 		$outstr .= "<h1>$line</h1>\n";
 		$dopar = 1;
 		$skippar = 1;
-	} elsif ($line =~ s/^[*]\s*//) {
+	} elsif ($line =~ s/^[*]\s+//) {
 		closebullet();
 		if ($skippar == 1) {
 			$outstr .= "<p>\n";
@@ -180,13 +180,20 @@ while($line = <$in>)
 		}
 		$indiv = 1;
 		$dopar = 1;
-	} elsif ($line =~ m/^_([^_][^_]*)_([^_]*)$/) {
+	} elsif ($line =~ m/^_([^_]+)_([^_]*)$/) {
 		if ($dopar == 1) {
 			newpar();
 		}
 		$dopar = 0;
 		$skippar = 0;
-		$outstr .= "<b>$1</b>$2\n";
+		$outstr .= "<strong>$1</strong>$2\n";
+	} elsif ($line =~ m/^[*]([^*]+)[*]([^*]*)$/) {
+		if ($dopar == 1) {
+			newpar();
+		}
+		$dopar = 0;
+		$skippar = 0;
+		$outstr .= "<em>$1</em>$2\n";
 	} else {
 		if ($dopar == 1) {
 			newpar();
