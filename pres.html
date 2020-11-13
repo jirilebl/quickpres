@@ -294,9 +294,17 @@ in file.html (it will replace the extension with html).
 </div>
 <div class="qpcontent" style="display:none;">
 <p>
+Adding -A, that is <tt>./quickpres.pl -A in.prs out.html</tt> or
+<tt>./quickpres.pl -A</tt> will just show all the
+blocks all at once initially.  It is like typing A right after loading
+the file.  All the keyboard shortcuts still work so you can type B to hide them.
+</div>
+<div class="qpcontent" style="display:none;">
+<p>
 Adding -a, that is <tt>./quickpres.pl -a in.prs out.html</tt> or
 <tt>./quickpres.pl -a</tt> will just show all the
-blocks all at once.
+blocks all at once and also not include the javascript to show/hide them
+or any of the keyboard navigation.
 </div>
 <div class="qpcontent" style="display:none;">
 <h2>Headers</h2>
@@ -440,24 +448,25 @@ You can add a bit of empty space (for perhaps drawing or something) with ___ (th
 see ... there's empty space.
 </div>
 <div class="qpcontent" style="display:none;">
-<h2>Centering paragraphs</h2>
+<h2>Centering</h2>
 <p>
-Putting a line inside inverted brackets will center it:
+Putting a line of text inside inverted brackets will center it:
 <p class="centered">
 this is centered
 </div>
 <div class="qpcontent" style="display:none;">
 <h2>Draft mode</h2>
 <p>
-If the first line of the file is "!!!DRAFT!!!", then the -a mode will be turned
-on.  Useful for editing so that you don't have to step through the steps,
-useful if you have some sort of a script to run quickpres.pl.
+If the first line of the file is "!!!DRAFT!!!" (without the quotes of course),
+then the -a mode will be turned on.  Useful for editing so that you don't
+have to step through the steps, useful if you have some sort of a script to
+run quickpres.pl.
 </div>
 <div class="qpcontent" style="display:none;">
 <p>
 As I was lazy to keep typing that, it can be replaced by "!-a" instead.
-Eventually that may be a more general mechanism for passing any other command
-line options, and draft mode may also diverge to have other features ...
+You can also use "!-A" to instead use the -A option, that is show the blocks
+but still allow hiding all of them with the keyboard shortcuts.
 </div>
 <div class="qpcontent" style="display:none;">
 <h2>That's it</h2>
