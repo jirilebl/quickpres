@@ -307,6 +307,16 @@ blocks all at once and also not include the javascript to show/hide them
 or any of the keyboard navigation.
 </div>
 <div class="qpcontent" style="display:none;">
+<p>
+The option -h will make the new line uncovered with j and covered with k
+appear at 80% instead of 90%.
+</div>
+<div class="qpcontent" style="display:none;">
+<p>
+The option -H will make the new line uncovered with j and covered with k
+appear at 70% instead of 90%.
+</div>
+<div class="qpcontent" style="display:none;">
 <h2>Headers</h2>
 <p>
 Use # for first level headers, ## for second level and ### for third level:
@@ -458,15 +468,18 @@ this is centered
 <h2>Draft mode</h2>
 <p>
 If the first line of the file is "!!!DRAFT!!!" (without the quotes of course),
-then the -a mode will be turned on.  Useful for editing so that you don't
+then the -a mode will be turned on.  Also big "DRAFT" watermark will in the
+beginning of your presentation.  Useful for editing so that you don't
 have to step through the steps, useful if you have some sort of a script to
-run quickpres.pl.
+run quickpres.pl.  You could also use the -a option if you don't want the
+watermark.
 </div>
 <div class="qpcontent" style="display:none;">
+<h2>Options inside the file</h2>
 <p>
-As I was lazy to keep typing that, it can be replaced by "!-a" instead.
-You can also use "!-A" to instead use the -A option, that is show the blocks
-but still allow hiding all of them with the keyboard shortcuts.
+You can also add command line options on the first line of the file with an
+exclamation point. For example making the first line "!-A -H" (without the
+quotes) will set the -A and -H options.
 </div>
 <div class="qpcontent" style="display:none;">
 <h2>That's it</h2>

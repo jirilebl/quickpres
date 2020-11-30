@@ -3,6 +3,8 @@
 my ($opt, $infile, $outfile) = @ARGV;
 my $allatonce = 0;
 my $iniallatonce = 0;
+my $newlineratio = 0.9;
+my $draftmode = 0;
 
 if (defined $opt) {
 	if ($opt =~ m/^-a/) {
@@ -11,6 +13,10 @@ if (defined $opt) {
 	} elsif ($opt =~ m/^-A/) {
 		$iniallatonce = 1;
 		$allatonce = 0;
+	} elsif ($opt =~ m/^-h/) {
+		$newlineratio = 0.8;
+	} elsif ($opt =~ m/^-H/) {
+		$newlineratio = 0.7;
 	} elsif ($opt =~ m/^-/) {
 		die "unknown option";
 	} else {
@@ -29,7 +35,13 @@ if (not defined $outfile) {
 	}
 }
 
-print "reading: $infile    writing: $outfile    all at once (only initial): $allatonce ($iniallatonce)\n";
+print "\nquickpres.pl\n";
+print "reading: $infile    writing: $outfile\n";
+
+if ($allatonce) { print "  all at once,"; }
+if ($iniallatonce) { print "  initially all at once,"; }
+
+print "  new line ratio: $newlineratio\n";
 
 open(my $in,'<', $infile) or die $!; 
 open(my $out, '>', $outfile) or die $!; 
@@ -72,17 +84,33 @@ while($line = <$in>)
 	$lineno++;
 
 	if ($lineno == 1 and $line =~ m/^!!!DRAFT!!!$/) {
-		print "DRAFT: setting allatonce to 1\n";
+		print "DRAFT: setting -a mode and turning on watermark\n";
 		$allatonce = 1;
 		$iniallatonce = 0;
-	} elsif ($lineno == 1 and $line =~ m/^!-a\s*$/) {
-		print "found options line.  Found -a, setting allatonce to 1\n";
-		$allatonce = 1;
-		$iniallatonce = 0;
-	} elsif ($lineno == 1 and $line =~ m/^!-A\s*$/) {
-		print "found options line.  Found -A, setting iniallatonce to 1\n";
-		$iniallatonce = 1;
-		$allatonce = 0;
+		$draftmode = 1;
+	} elsif ($lineno == 1 and $line =~ m/^!(-.*)\s*$/) {
+		$o = $1;
+		print "found options line: $o\n";
+		@opts = split(' ', $o);
+		foreach my $i (@opts) {
+			if ($i eq "-a") {
+				print "Found -a, setting allatonce mode\n";
+				$allatonce = 1;
+				$iniallatonce = 0;
+			} elsif ($i eq "-A") {
+				print "Found -A, setting iniallatonce mode\n";
+				$iniallatonce = 1;
+				$allatonce = 0;
+			} elsif ($i eq "-h") {
+				print "Found -h, setting newlineratio to 0.8\n";
+				$newlineratio = 0.8;
+			} elsif ($i eq "-H") {
+				print "Found -H, setting newlineratio to 0.7\n";
+				$newlineratio = 0.7;
+			} else {
+				print "Uknown option $i, ignoring\n";
+			}
+		}
 	} elsif ($line =~ s/^###\s*//) {
 		closebullet();
 		$outstr .= "<h3>$line</h3>\n";
@@ -305,6 +333,16 @@ mjx-container { margin:0px !important; }
 <body>
 END
 
+if ($draftmode == 1) {
+print $out <<END;
+<div style="position:absolute; z-index:-1;">
+  <p style="font-size:700%; color:lightgray; transform:rotate(-45deg);">DRAFT</p>
+  <p style="font-size:700%; color:lightgray; transform:rotate(-45deg);">DRAFT</p>
+  <p style="font-size:700%; color:lightgray; transform:rotate(-45deg);">DRAFT</p>
+</div>
+END
+}
+
 if ($allatonce == 0) {
 print $out <<END;
 <script>
@@ -340,14 +378,14 @@ function doenter() {
   } else if (event.key == "j") {
     \$elt = \$( ".qpcontent:hidden" ).first();
     \$elt.fadeIn( 400 );
-    if (\$elt[0].getBoundingClientRect().height > window.innerHeight*0.9) {
+    if (\$elt[0].getBoundingClientRect().height > window.innerHeight*$newlineratio) {
       window.scrollTo({
 	   top: \$elt[0].getBoundingClientRect().top+window.scrollY,
            behavior: "smooth"
       });
     } else {
       window.scrollTo({
-	   top: \$elt[0].getBoundingClientRect().bottom-window.innerHeight*0.9+window.scrollY,
+	   top: \$elt[0].getBoundingClientRect().bottom-window.innerHeight*$newlineratio+window.scrollY,
            behavior: "smooth"
       });
     }
@@ -359,14 +397,14 @@ function doenter() {
       if (\$elt.length == 0) {
         \$("html")[0].scrollIntoView({ behavior: "smooth", block: "start" });
       } else {
-        if (\$elt[0].getBoundingClientRect().height > window.innerHeight*0.9) {
+        if (\$elt[0].getBoundingClientRect().height > window.innerHeight*$newlineratio) {
           window.scrollTo({
 	       top: \$elt[0].getBoundingClientRect().top+window.scrollY,
                behavior: "smooth"
           });
         } else {
           window.scrollTo({
-	       top: \$elt[0].getBoundingClientRect().bottom-window.innerHeight*0.9+window.scrollY,
+	       top: \$elt[0].getBoundingClientRect().bottom-window.innerHeight*$newlineratio+window.scrollY,
                behavior: "smooth"
           });
 	}
