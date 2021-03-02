@@ -17,6 +17,16 @@ if (defined $opt) {
 		$newlineratio = 0.8;
 	} elsif ($opt =~ m/^-H/) {
 		$newlineratio = 0.7;
+	} elsif ($opt =~ m/^--help/) {
+		print "quickpres.pl <option> <in> <out>\n";
+		print "one option, could be\n";
+		print "-a = all at once, nohiding\n";
+		print "-A = initially all shown\n";
+		print "-h = new stuff shown at 80% (normally 90%)\n";
+		print "-H = new stuff shown at 70%\n";
+		print "Use '!-<option>' as first line, can specify\n";
+		print "multiple options that way\n";
+		exit 0;
 	} elsif ($opt =~ m/^-/) {
 		die "unknown option";
 	} else {
