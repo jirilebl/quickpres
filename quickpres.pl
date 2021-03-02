@@ -6,6 +6,8 @@ my $iniallatonce = 0;
 my $newlineratio = 0.9;
 my $draftmode = 0;
 
+my $macros = "";
+
 if (defined $opt) {
 	if ($opt =~ m/^-a/) {
 		$allatonce = 1;
@@ -121,6 +123,10 @@ while($line = <$in>)
 				print "Uknown option $i, ignoring\n";
 			}
 		}
+	} elsif ($line =~ s/^!\\newcommand//) {
+		$macros .= "\\newcommand$line\n";
+	} elsif ($line =~ s/^!\\renewcommand//) {
+		$macros .= "\\renewcommand$line\n";
 	} elsif ($line =~ s/^###\s*//) {
 		closebullet();
 		$outstr .= "<h3>$line</h3>\n";
@@ -342,6 +348,14 @@ mjx-container { margin:0px !important; }
 
 <body>
 END
+
+if ($macros ne "") {
+	print $out <<END
+<div style="display:none">
+\\($macros\\)
+</div>
+END
+}
 
 if ($draftmode == 1) {
 print $out <<END;

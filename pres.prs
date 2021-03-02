@@ -305,6 +305,19 @@ exclamation point. For example making the first line "!-A -H" (without the
 quotes) will set the -A and -H options.
 
 >>>
+
+## LaTeX macros
+
+If a line starts with "!\newcommand" or "!\renewcommand", then this is added
+to a special invisible math environment at the beginning of the file to set
+macros.  They aren't defined where they are, they are just collected and
+added up front.  For example to use the common \R macro for \mathbb{R}
+use !\newcommand{\R}{\mathbb{R}}
+!\newcommand{\R}{\mathbb{R}}
+and use it like this: $\R$.  Note: The macro will be defined for the whole file, no
+matter where you put it though, they are all collected and stuffed up front.
+
+>>>
 ## That's it
 
 There's always a chunk of empty space added behind the presentation so
