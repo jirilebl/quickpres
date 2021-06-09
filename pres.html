@@ -14,7 +14,7 @@ MathJax = {
 </script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6%2CscrollIntoView"></script> 
 <script id="MathJax-script" async 
- src="https://cdn.jsdelivr.net/npm/mathjax/es5/tex-chtml.js"> 
+ src="https://cdn.jsdelivr.net/npm/mathjax/es5/tex-svg.js"> 
 </script> 
 <style>
 html { scroll-behavior: smooth; }
@@ -69,6 +69,10 @@ mjx-container { margin:0px !important; }
 </head>
 
 <body>
+<div style="display:none">
+\(\newcommand{\R}{\mathbb{R}}
+\)
+</div>
 <script>
 function doenter() {
   var rect = $("#endspan")[0].getBoundingClientRect();
@@ -480,6 +484,17 @@ watermark.
 You can also add command line options on the first line of the file with an
 exclamation point. For example making the first line "!-A -H" (without the
 quotes) will set the -A and -H options.
+</div>
+<div class="qpcontent" style="display:none;">
+<h2>LaTeX macros</h2>
+<p>
+If a line starts with "!\newcommand" or "!\renewcommand", then this is added
+to a special invisible math environment at the beginning of the file to set
+macros.  They aren't defined where they are, they are just collected and
+added up front.  For example to use the common \R macro for \mathbb{R}
+use !\newcommand{\R}{\mathbb{R}}
+and use it like this: $\R$.  Note: The macro will be defined for the whole file, no
+matter where you put it though, they are all collected and stuffed up front.
 </div>
 <div class="qpcontent" style="display:none;">
 <h2>That's it</h2>

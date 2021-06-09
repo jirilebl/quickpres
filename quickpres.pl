@@ -120,7 +120,7 @@ while($line = <$in>)
 				print "Found -H, setting newlineratio to 0.7\n";
 				$newlineratio = 0.7;
 			} else {
-				print "Uknown option $i, ignoring\n";
+				print "Unknown option $i, ignoring\n";
 			}
 		}
 	} elsif ($line =~ s/^!\\newcommand//) {
@@ -259,6 +259,8 @@ while($line = <$in>)
 		$dopar = 0;
 		$skippar = 0;
 		$outstr .= "<em>$1</em>$2\n";
+	} elsif ($line =~ m/^%/) {
+		# do nothing, it's a comment
 	} else {
 		if ($dopar == 1) {
 			newpar();
@@ -292,7 +294,7 @@ MathJax = {
 </script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6%2CscrollIntoView"></script> 
 <script id="MathJax-script" async 
- src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"> 
+ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"> 
 </script> 
 <style>
 html { scroll-behavior: smooth; }
