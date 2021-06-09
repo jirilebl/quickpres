@@ -318,6 +318,15 @@ and use it like this: $\R$.  Note: The macro will be defined for the whole file,
 matter where you put it though, they are all collected and stuffed up front.
 
 >>>
+
+## Comments
+
+If a line begins with % then we ignore it (there should be no whitespace
+before it).  This is similar to how LaTeX works,
+but in the middle of a line, % does nothing special.
+% This line is ignored.
+
+>>>
 ## That's it
 
 There's always a chunk of empty space added behind the presentation so
