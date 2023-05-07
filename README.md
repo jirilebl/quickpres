@@ -15,12 +15,6 @@ you'd have to edit the file to use a local installation.
 For a demo output see the
 [pres.html](https://jirilebl.github.io/quickpres/pres.html) file.
 
-I am teaching with this currently (Fall 2020) and so capability and sometimes
-syntax might change a bit from day to day, though I don't really expect it to
-change much, I do want it to be able to read older presentations I've done.
-If you want to use this you might want to just want to fix at a specific
-version unless you plan on tracking the changes to syntax.
-
 ## Some more hacky scripts
 
 The `runinfirefox.sh` is a very simple script that when passed the name without
