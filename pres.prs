@@ -290,7 +290,7 @@ Putting a line of text inside inverted brackets will center it:
 ## Draft mode
 
 If the first line of the file is "!!!DRAFT!!!" (without the quotes of course),
-then the -a mode will be turned on.  Also big "DRAFT" watermark will in the
+then the -a mode will be turned on.  A big "DRAFT" watermark will appear in the
 beginning of your presentation.  Useful for editing so that you don't
 have to step through the steps, useful if you have some sort of a script to
 run quickpres.pl.  You could also use the -a option if you don't want the
