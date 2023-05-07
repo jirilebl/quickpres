@@ -8,7 +8,9 @@ of the "board" so that past things don't just disappear into oblivioun.
 Simple syntax converted into HTML that is displayed with a web browser.  The
 syntax is explained in the sample presentation pres.prs.  You should run
 `./quickpres.pl` in this directory to generate pres.html, which you then view
-in a browser.  To see the syntax, just view the pres.prs file in a text editor.
+in a browser.  To see the syntax, just view the
+[pres.prs](https://github.com/jirilebl/quickpres/blob/master/pres.prs)
+file in a text editor.
 Internet access is required to run the presentation however if MathJax is used,
 you'd have to edit the file to use a local installation.
 
