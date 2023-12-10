@@ -225,9 +225,7 @@ Quick links can be added on a separate line as (http://link)
 (http://www.google.com)
 
 Or if you want to have some text instead of the url then [text](http://link)
-
 [text](http://www.google.com)
-
 Also notice there is less space around this link since we didn't leave an
 empty line around it.
 
