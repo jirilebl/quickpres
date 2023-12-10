@@ -77,7 +77,7 @@ We left an empty line for more space.
 >>>
 You don't want to start new lines in an equation with *, _, !, #, (, backslash, as those
 may have special meaning and this script does not really track if you are in a math
-environment or not.)  This is especially true for *.
+environment or not.  This is especially true for *.
 You can put an empty space in front and it will work:
 \[
 1
@@ -97,7 +97,7 @@ two backslashes: \\.  (But see below about two backslashes on
 a separate line)
 
 >>>
-## That progressive hidy thingie
+## That progressive hidey thingie
 
 If you want to hide the next chuck, put a >>> on a separate line.
 Probably want to add an empty line, but really it is a new html division,
@@ -166,7 +166,7 @@ The first first-level heading is used as the title for the HTML page.
 >>>
 * are done
 * similar
-* to markdown with stars.
+* to markdown with asterisks.
 
 * this is a bullet (with some leading vertical space)
 
@@ -178,15 +178,17 @@ This line will be separate.
 
 >>>
 
-*The star must be followed by a space otherwise it is not a bullet
+*The asterisk must be followed by a space otherwise it is not a bullet.
+Note that asterisks are also used for italics, see below.
 
 >>>
 
 Beware of bullets in the middle of the paragraph
 * that you did not mean, and you just wanted to input
-a star.
+an asterisk.
 \
-If you need to add a star you can just add a space
+If you need to add an asterisk and it is at the beginning of a line, you can
+just add a space before it
  * this is not a bullet.
 
 >>>
@@ -222,8 +224,10 @@ Quick links can be added on a separate line as (http://link)
 
 (http://www.google.com)
 
-Or if you want to have some text then [text](http://link)
+Or if you want to have some text instead of the url then [text](http://link)
+
 [text](http://www.google.com)
+
 Also notice there is less space around this link since we didn't leave an
 empty line around it.
 
@@ -251,13 +255,15 @@ to leave a space right after bold.
 
 >>>
 
-Similarly you can use stars
+Similarly you can use asterisks
 *to make something italic* although you cannot combine italics and bold
-like this (though you can just use html then)
+like this (though you can just use html then).
+Again, *it has to be at the beginning of a line* otherwise
+*it does not work*.
 
 >>>
 
-Make sure to not add a space after the star:
+Make sure to not add a space after the asterisk:
 * this* is not in italics, it is a bullet.
 
 >>>
@@ -266,7 +272,7 @@ And again, to use a leading * in mathematics say, just don't make it the
 first character on a line:
 \[
 3
- *5* \text{ok even if there are two stars on a line}.
+ *5* \text{ok even if there are two asterisks on a line}.
 \]
 
 >>>
@@ -310,9 +316,8 @@ quotes) will set the -A and -H options.
 
 If a line starts with "!\newcommand" or "!\renewcommand", then this is added
 to a special invisible math environment at the beginning of the file to set
-macros.  They aren't defined where they are, they are just collected and
-added up front.  For example to use the common \R macro for \mathbb{R}
-use !\newcommand{\R}{\mathbb{R}}
+up macros.  For example to use the common \R macro
+for \mathbb{R} use !\newcommand{\R}{\mathbb{R}}
 !\newcommand{\R}{\mathbb{R}}
 and use it like this: $\R$.  Note: The macro will be defined for the whole file, no
 matter where you put it though, they are all collected and stuffed up front.
