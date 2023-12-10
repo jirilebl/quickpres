@@ -25,6 +25,7 @@ firefox on pres.html.  This will work only if you have Linux.
 
 The `buildprswatch.sh` is an even more Linux/GNOME specific script for writing
 presentations.  You need zsh, epiphany (gnome web), and gvim.  You start it as
-`./buildprswatch.sh pres` and it starts an editor on pres.prs, starts epiphany
+`./buildprswatch.sh pres` and it starts an editor (gvim, if you want another
+editor, you have to edit the script) on pres.prs, starts epiphany
 on pres.html.  Whenever you save, the script will rerun quick press (with -A),
 and epihpany automatically reloads.  You might need to edit this script to suit.
